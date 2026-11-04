@@ -176,7 +176,7 @@
     // Preview alternative themes with ?theme=notebook|fluoro|editorial|blueprint; the theme carries over to internal links.
     (function () {
       var t = new URLSearchParams(location.search).get('theme');
-      if (!/^(notebook|fluoro|editorial|blueprint)$/.test(t || '')) return;
+      if (!/^(notebook|fluoro|editorial|blueprint|coral)$/.test(t || '')) return;
       document.write('<link rel="stylesheet" href="css/themes/' + t + '.css">');
       document.documentElement.setAttribute('data-skin', t);
       addEventListener('DOMContentLoaded', function () {

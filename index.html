@@ -123,7 +123,7 @@
     // Preview alternative themes with ?theme=notebook|fluoro|editorial|blueprint; the theme carries over to internal links.
     (function () {
       var t = new URLSearchParams(location.search).get('theme');
-      if (!/^(notebook|fluoro|editorial|blueprint)$/.test(t || '')) return;
+      if (!/^(notebook|fluoro|editorial|blueprint|coral)$/.test(t || '')) return;
       document.write('<link rel="stylesheet" href="css/themes/' + t + '.css">');
       document.documentElement.setAttribute('data-skin', t);
       addEventListener('DOMContentLoaded', function () {
@@ -233,7 +233,7 @@
       </ul>
       <p>
         I'm developing models of untethered soft magnetic millirobots, with the aim of using them to design and control the robots
-        I build. Details will follow once the work is published.
+        I build. I'll share details once the manuscript is submitted.
       </p>
       <p class="status">First-author manuscript in preparation.</p>
     </article>
@@ -247,8 +247,8 @@
         <li class="tag">Embedded sensing</li>
       </ul>
       <ul>
-        <li><strong>Robotic-Guided Brain Biopsy Optimization:</strong> algorithms that create patient-specific surgical paths from MRI/CT imaging,
-          minimizing tissue damage and enhancing precision in minimally invasive brain surgery.</li>
+        <li><strong>Robotic-Guided Brain Biopsy Optimization:</strong> algorithms that plan patient-specific surgical paths from MRI/CT imaging,
+          aiming to avoid functional zones in minimally invasive brain surgery (manuscript under review).</li>
         <li><strong>Mechanical ventilation:</strong> a real-time wireless sensor system for a single-limb passive vented ventilator circuit,
           where I worked on sensor serial communication and system optimization.</li>
       </ul>
@@ -263,15 +263,15 @@
       <li><time datetime="2026-07">Jul 2026</time><span>Presented the poster “Image-Guided Small-Scale Magnetic Robot Navigation Under X-Ray” at the 7th Turkish Robotics Conference.</span></li>
       <li><time datetime="2024">2024</time><span>Joined Prof. Metin Sitti's Medical Robotics Laboratory at Koç University for my M.Sc.</span></li>
       <li><time datetime="2024">2024</time><span>Graduated Summa Cum Laude with a double-major B.Sc., ranked 3rd; named a Koç University Presidential Fellow.</span></li>
-      <li><time datetime="2023">2023</time><span>Ventilator sensing paper appeared in <em>Biomedical Signal Processing and Control</em>.</span></li>
+      <li><time datetime="2023">2023</time><span>Co-authored a journal article on real-time wireless sensing for mechanical ventilation in <em>Biomedical Signal Processing and Control</em>.</span></li>
     </ul>
   </section>
 
   <!-- Publications -->
   <section class="section" id="publications">
-    <h2>Publications &amp; Manuscripts</h2>
+    <h2>Publications &amp; Presentations</h2>
 
-    <p class="pub-group">Journal article</p>
+    <p class="pub-group">Peer-reviewed journal article</p>
     <ul class="pubs">
       <li>
         <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S1746809423004275">A novel real-time wireless sensor integration for enhancing positive pressure system operation in single limb passive vented circuit</a><br>
@@ -280,34 +280,34 @@
       </li>
     </ul>
 
-    <p class="pub-group">Under review</p>
+    <p class="pub-group">Manuscript under review</p>
     <ul class="pubs">
       <li>
         <span class="pub-title">Path optimization for robotic surgery avoiding functional zones</span>
         <span class="pub-meta">(full title withheld pending review)</span><br>
-        <span class="pub-meta"><strong>B. Karahasan</strong>, I. Lazoglu, I. Solaroglu · <em>Computer Methods and Programs in Biomedicine</em> (2026)</span>
+        <span class="pub-meta"><strong>B. Karahasan</strong>, I. Lazoglu, I. Solaroglu · submitted to <em>Computer Methods and Programs in Biomedicine</em>; under review, not yet accepted</span>
       </li>
     </ul>
 
-    <p class="pub-group">In preparation</p>
+    <p class="pub-group">Conference presentation (poster)</p>
+    <ul class="pubs">
+      <li>
+        <a class="pub-title" href="projects/xray-platform.html">Image-Guided Small-Scale Magnetic Robot Navigation Under X-Ray</a><br>
+        <span class="pub-meta"><strong>B. Karahasan</strong>, Ö. Yiğit, C. Wang, M. Sitti · Poster presentation, <em>7th Turkish Robotics Conference</em> (national), Koç University, İstanbul (July 2026)</span>
+      </li>
+    </ul>
+
+    <p class="pub-group">Manuscripts in preparation (not yet submitted)</p>
     <ul class="pubs">
       <li>
         <span class="pub-title">Physics-based modeling of soft magnetic millirobots</span>
         <span class="pub-meta">(title withheld)</span><br>
-        <span class="pub-meta"><strong>B. Karahasan</strong> et al. · first author</span>
+        <span class="pub-meta"><strong>B. Karahasan</strong> et al. · not yet submitted</span>
       </li>
       <li>
-        <span class="pub-title">Journal manuscript extending the X-ray navigation work below</span>
+        <span class="pub-title">Journal manuscript extending the X-ray navigation work above</span>
         <span class="pub-meta">(title withheld)</span><br>
-        <span class="pub-meta"><strong>B. Karahasan</strong> et al. · first author</span>
-      </li>
-    </ul>
-
-    <p class="pub-group">Conference presentation</p>
-    <ul class="pubs">
-      <li>
-        <a class="pub-title" href="projects/xray-platform.html">Image-Guided Small-Scale Magnetic Robot Navigation Under X-Ray</a><br>
-        <span class="pub-meta"><strong>B. Karahasan</strong>, Ö. Yiğit, C. Wang, M. Sitti · Poster, <em>7th Turkish Robotics Conference</em>, Koç University, İstanbul (July 2026)</span>
+        <span class="pub-meta"><strong>B. Karahasan</strong> et al. · not yet submitted</span>
       </li>
     </ul>
   </section>

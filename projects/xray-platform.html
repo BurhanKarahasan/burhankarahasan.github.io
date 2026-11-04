@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Burhan Karahasan">
   <title>Magnetic Robot Navigation Under X-Ray — Burhan Karahasan</title>
-  <meta name="description" content="An automated platform for closed-loop control of small-scale robots under X-ray imaging, built end to end by Burhan Karahasan in Prof. Metin Sitti's Medical Robotics Laboratory at Koç University.">
+  <meta name="description" content="An automated platform for closed-loop control of small-scale robots under X-ray imaging, built by Burhan Karahasan (with an adapted neural-network detector from prior group work) in Prof. Metin Sitti's Medical Robotics Laboratory at Koç University.">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Magnetic Robot Navigation Under X-Ray — Burhan Karahasan">
@@ -155,7 +155,7 @@
     // Preview alternative themes with ?theme=notebook|fluoro|editorial|blueprint; the theme carries over to internal links.
     (function () {
       var t = new URLSearchParams(location.search).get('theme');
-      if (!/^(notebook|fluoro|editorial|blueprint)$/.test(t || '')) return;
+      if (!/^(notebook|fluoro|editorial|blueprint|coral)$/.test(t || '')) return;
       document.write('<link rel="stylesheet" href="../css/themes/' + t + '.css">');
       document.documentElement.setAttribute('data-skin', t);
       addEventListener('DOMContentLoaded', function () {
@@ -234,7 +234,7 @@
 
     <section class="section" id="built">
       <h2>What I built</h2>
-      <p>Apart from the perception network, the platform is mine end to end, from the motors to the control software.</p>
+      <p>Apart from the perception network, which comes from our group's prior work, I designed and built the platform, from the motors to the control software, working with my co-authors and under Prof. Sitti's supervision.</p>
       <ul class="xr-checklist">
         <li><strong>Robotic platform</strong><span>Motorized stages, with a stepper and a servo positioning the permanent magnet, integrated inside the cabinet X-ray system.</span></li>
         <li><strong>Live image capture</strong><span>Frames taken from the X-ray unit and streamed into the control loop as the feedback signal.</span></li>
