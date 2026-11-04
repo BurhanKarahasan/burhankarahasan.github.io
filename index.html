@@ -103,7 +103,9 @@
 
     /* Publications */
     .pubs { list-style: none; margin: 0; padding: 0; }
-    .pubs li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .pubs li { position: relative; padding: 12px 0 12px 1.4rem; border-bottom: 1px solid var(--border); }
+    .pubs li::before { content: ""; position: absolute; left: .3rem; top: 1.25em; width: .45rem; height: .45rem; border-radius: 50%; background: var(--accent); }
+    .pubs strong { font-weight: 800; color: var(--text); }
     .pubs li:last-child { border-bottom: 0; }
     .pub-title { font-weight: 600; }
     .pub-meta { color: var(--muted); font-size: 0.93rem; }
