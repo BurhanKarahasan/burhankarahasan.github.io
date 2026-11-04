@@ -172,6 +172,22 @@
     .gallery a:hover img { transform: scale(1.03); }
     @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
   </style>
+  <script data-theme-preview>
+    // Preview alternative themes with ?theme=notebook|fluoro|editorial|blueprint; the theme carries over to internal links.
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (!/^(notebook|fluoro|editorial|blueprint)$/.test(t || '')) return;
+      document.write('<link rel="stylesheet" href="css/themes/' + t + '.css">');
+      document.documentElement.setAttribute('data-skin', t);
+      addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a[href]').forEach(function (a) {
+          var h = a.getAttribute('href');
+          if (/^(https?:|mailto:|#)/.test(h) || /\.pdf$/.test(h)) return;
+          var parts = h.split('#'); a.setAttribute('href', parts[0] + '?theme=' + t + (parts[1] ? '#' + parts[1] : ''));
+        });
+      });
+    })();
+  </script>
 </head>
 <body>
 

@@ -151,6 +151,22 @@
       .xr-figure img { display:block; width:100%; height:auto; border-radius:10px; background:#fff; border:1px solid var(--border, #e5e7eb); }
     .xr-authors { color: var(--muted, #555); font-size: .95rem; margin-top: .75rem; }
   </style>
+  <script data-theme-preview>
+    // Preview alternative themes with ?theme=notebook|fluoro|editorial|blueprint; the theme carries over to internal links.
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (!/^(notebook|fluoro|editorial|blueprint)$/.test(t || '')) return;
+      document.write('<link rel="stylesheet" href="../css/themes/' + t + '.css">');
+      document.documentElement.setAttribute('data-skin', t);
+      addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a[href]').forEach(function (a) {
+          var h = a.getAttribute('href');
+          if (/^(https?:|mailto:|#)/.test(h) || /\.pdf$/.test(h)) return;
+          var parts = h.split('#'); a.setAttribute('href', parts[0] + '?theme=' + t + (parts[1] ? '#' + parts[1] : ''));
+        });
+      });
+    })();
+  </script>
 </head>
 <body>
   <nav class="site-nav"><a class="brand" href="../index.html">Burhan Karahasan</a><div class="nav-links"><a href="../index.html#research">Research</a><a href="../index.html#publications">Publications</a><a href="../projects/xray-platform.html">X-ray Platform</a><a href="../personal.html">Beyond the Lab</a><a href="../data/Burhan_Karahasan_CV.pdf">CV</a></div></nav>
@@ -230,7 +246,7 @@
 
     <section class="section" id="next">
       <h2>What's next</h2>
-      <p>I am extending this work toward a journal manuscript, and toward automated control of microrobot swarms under X-ray: many small agents, observed through the same clinical imaging and steered as a group.</p>
+      <p>I am extending this work into a first-author journal manuscript.</p>
     </section>
 
     <div class="xr-actions">

@@ -1,0 +1,676 @@
+/* Theme: "lab notebook"  (preview with ?theme=notebook)
+   Off-white graph paper with a red double margin rule, ink-blue and pencil-graphite text,
+   typewriter labels (Special Elite), handwritten margin notes (Caveat, short annotations only),
+   Literata headings, Inter body. Cards and figures are taped into the notebook.
+   Dark variant: a slate "night notebook" with chalk-like ink.
+   Loaded after site.css and each page's inline styles; everything is scoped to data-skin="notebook". */
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Special+Elite&display=swap");
+
+/* ---------- Tokens ---------- */
+:root[data-skin="notebook"] {
+  --bg: #fbf9f2;
+  --surface: #fffdf8;
+  --surface-2: #f5f1e5;
+  --text: #1e2632;
+  --heading: #172449;
+  --muted: #4a5361;
+  --accent: #23408e;           /* fountain-pen ink */
+  --accent-soft: #e6ebf6;
+  --accent-warm: #b02a1c;      /* red correction pen */
+  --warm-soft: #f8e4df;
+  --on-accent: #ffffff;
+  --border: #ddd6c4;
+  --border-strong: #b9b09a;
+  --pencil: #8b8c8e;
+  --grid-minor: rgba(35, 64, 142, 0.065);
+  --grid-major: rgba(35, 64, 142, 0.12);
+  --margin-rule: rgba(190, 50, 40, 0.38);
+  --tape: rgba(230, 208, 135, 0.78);
+  --tape-edge: rgba(150, 130, 70, 0.18);
+  --highlight: rgba(255, 210, 90, 0.45);
+  --note-bg: #fdf4cc;
+  --mat: #fffdf8;
+  --mat-text: #1e2632;
+  --mat-muted: #454d5a;
+  --mat-accent: #23408e;
+  --mat-warm: #a8291b;
+  --polaroid: #fffef9;
+  --shadow: 0 1px 1px rgba(60, 50, 30, 0.06), 0 8px 18px -10px rgba(60, 50, 30, 0.28);
+  --shadow-hover: 0 2px 3px rgba(60, 50, 30, 0.08), 0 16px 30px -12px rgba(60, 50, 30, 0.38);
+  --radius: 3px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: "Literata", Georgia, "Times New Roman", serif;
+  --font-mono: "Special Elite", "Courier New", ui-monospace, monospace;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-skin="notebook"]:not([data-theme="light"]) {
+    --bg: #1b2127;
+    --surface: #222930;
+    --surface-2: #283039;
+    --text: #e6e3da;
+    --heading: #f3f0e7;
+    --muted: #a9b0b8;
+    --accent: #a3c4f5;          /* chalk blue */
+    --accent-soft: #2a3646;
+    --accent-warm: #f0a79c;     /* chalk pink */
+    --warm-soft: #3a2a29;
+    --on-accent: #141a20;
+    --border: #39424c;
+    --border-strong: #56616d;
+    --pencil: #6d7680;
+    --grid-minor: rgba(220, 230, 240, 0.04);
+    --grid-major: rgba(220, 230, 240, 0.075);
+    --margin-rule: rgba(240, 150, 140, 0.28);
+    --tape: rgba(222, 210, 165, 0.32);
+    --tape-edge: rgba(0, 0, 0, 0.2);
+    --highlight: rgba(255, 210, 90, 0.2);
+    --note-bg: #302c20;
+    --mat: #ece8dd;
+    --mat-text: #1e2632;
+    --mat-muted: #444b57;
+    --mat-accent: #23408e;
+    --mat-warm: #9e2618;
+    --polaroid: #e9e5da;
+    --shadow: 0 1px 1px rgba(0, 0, 0, 0.35), 0 10px 22px -12px rgba(0, 0, 0, 0.7);
+    --shadow-hover: 0 2px 3px rgba(0, 0, 0, 0.4), 0 18px 34px -12px rgba(0, 0, 0, 0.8);
+  }
+}
+:root[data-skin="notebook"][data-theme="dark"] {
+  --bg: #1b2127;
+  --surface: #222930;
+  --surface-2: #283039;
+  --text: #e6e3da;
+  --heading: #f3f0e7;
+  --muted: #a9b0b8;
+  --accent: #a3c4f5;
+  --accent-soft: #2a3646;
+  --accent-warm: #f0a79c;
+  --warm-soft: #3a2a29;
+  --on-accent: #141a20;
+  --border: #39424c;
+  --border-strong: #56616d;
+  --pencil: #6d7680;
+  --grid-minor: rgba(220, 230, 240, 0.04);
+  --grid-major: rgba(220, 230, 240, 0.075);
+  --margin-rule: rgba(240, 150, 140, 0.28);
+  --tape: rgba(222, 210, 165, 0.32);
+  --tape-edge: rgba(0, 0, 0, 0.2);
+  --highlight: rgba(255, 210, 90, 0.2);
+  --note-bg: #302c20;
+  --mat: #ece8dd;
+  --mat-text: #1e2632;
+  --mat-muted: #444b57;
+  --mat-accent: #23408e;
+  --mat-warm: #9e2618;
+  --polaroid: #e9e5da;
+  --shadow: 0 1px 1px rgba(0, 0, 0, 0.35), 0 10px 22px -12px rgba(0, 0, 0, 0.7);
+  --shadow-hover: 0 2px 3px rgba(0, 0, 0, 0.4), 0 18px 34px -12px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+/* ---------- Paper ---------- */
+html[data-skin="notebook"] body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: center -1px, center 0, center -1px, center 0;
+  background-repeat: repeat;
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+/* Red double margin rule, only where there is room beside the column */
+@media (min-width: 1000px) {
+  html[data-skin="notebook"] body {
+    background-image:
+      linear-gradient(90deg, var(--margin-rule) 0 1px, transparent 1px 4px, var(--margin-rule) 4px 5px),
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+    background-size: 5px 100%, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: calc(50% - 470px) 0, center -1px, center 0, center -1px, center 0;
+    background-repeat: repeat-y, repeat, repeat, repeat, repeat;
+  }
+}
+
+html[data-skin="notebook"] ::selection { background: var(--highlight); color: var(--text); }
+
+html[data-skin="notebook"] a { color: var(--accent); }
+html[data-skin="notebook"] a:hover { text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+
+html[data-skin="notebook"] :focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+html[data-skin="notebook"] :is(h1, h2, h3) {
+  font-family: var(--font-head);
+  color: var(--heading);
+  font-weight: 600;
+}
+html[data-skin="notebook"] h1 { font-weight: 700; letter-spacing: -0.012em; }
+
+/* Labels: typewriter */
+html[data-skin="notebook"] :is(.kicker, .xr-kicker, .eyebrow, .pub-group, .tag, .chip, .news time, .footer, .fun-label) {
+  font-family: var(--font-mono);
+  font-feature-settings: normal;
+}
+
+/* ---------- Navigation ---------- */
+html[data-skin="notebook"] body > .site-nav {
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--bg) 60%, transparent), 0 3px 0 -2px var(--border);
+}
+html[data-skin="notebook"] .site-nav .brand {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--heading);
+}
+html[data-skin="notebook"] .site-nav .brand::before {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: none;
+  border: 1.6px solid var(--accent-warm);
+  box-shadow: none;
+  transform: rotate(-12deg);
+  border-top-color: transparent;
+}
+html[data-skin="notebook"] .site-nav .brand:hover { color: var(--accent); }
+html[data-skin="notebook"] .site-nav .nav-links a { color: var(--muted); }
+html[data-skin="notebook"] .site-nav .nav-links a:hover,
+html[data-skin="notebook"] .site-nav .nav-links a[aria-current="page"] { color: var(--accent); }
+html[data-skin="notebook"] .site-nav .nav-links a::after {
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 0;
+}
+
+/* ---------- Hero ---------- */
+/* Hand-drawn red underline under the name */
+html[data-skin="notebook"] :is(.hero, .xr-hero) h1::after {
+  width: 190px;
+  max-width: 70%;
+  height: 12px;
+  margin-top: 0.14em;
+  border-radius: 0;
+  background: var(--accent-warm);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C30 3 52 11 82 6 S132 2 160 7 S188 9 198 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C30 3 52 11 82 6 S132 2 160 7 S188 9 198 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%;
+}
+html[data-skin="notebook"] .hero .statement {
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+html[data-skin="notebook"] .hero .affil { color: var(--muted); }
+
+/* Portrait as a taped-in instant photo */
+html[data-skin="notebook"] .hero .photo-wrap { transform: rotate(2deg); }
+html[data-skin="notebook"] .hero .photo-wrap .photo {
+  width: 200px;
+  height: 232px;
+  padding: 9px 9px 32px;
+  border-radius: 2px;
+  background: var(--polaroid);
+  border: 1px solid color-mix(in srgb, var(--border-strong) 40%, transparent);
+  box-shadow: var(--shadow);
+}
+html[data-skin="notebook"] .hero .photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: auto;
+  top: -11px;
+  left: 50%;
+  width: 88px;
+  height: 24px;
+  z-index: 1;
+  transform: translateX(-50%) rotate(-4deg);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 6px),
+    var(--tape);
+  box-shadow: 0 0 0 0.5px var(--tape-edge);
+  clip-path: polygon(0 8%, 5% 0, 30% 6%, 60% 0, 95% 5%, 100% 0, 97% 50%, 100% 100%, 70% 94%, 35% 100%, 4% 95%, 0 100%, 3% 50%);
+}
+html[data-skin="notebook"] .hero .photo-wrap::after { display: none; }
+@media (max-width: 680px) {
+  html[data-skin="notebook"] .hero .photo-wrap { margin: 10px 0 0 4px; }
+  html[data-skin="notebook"] .hero .photo-wrap .photo { width: 132px; height: 154px; padding: 6px 6px 22px; }
+  html[data-skin="notebook"] .hero .photo-wrap::before { width: 64px; height: 18px; top: -9px; }
+}
+
+/* "Open to PhD positions": rubber stamp in red ink */
+html[data-skin="notebook"] .open-note {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  background: color-mix(in srgb, var(--warm-soft) 55%, transparent);
+  border: 1.6px solid var(--accent-warm);
+  border-radius: 4px;
+  padding: 4px 12px;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--bg) 70%, transparent), inset 0 0 0 3px color-mix(in srgb, var(--accent-warm) 45%, transparent);
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+html[data-skin="notebook"] .open-note::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  box-shadow: none;
+  animation: none;
+}
+
+/* ---------- Buttons ---------- */
+html[data-skin="notebook"] .btn,
+html[data-skin="notebook"] .xr-actions .btn,
+html[data-skin="notebook"] .closing .say-hi {
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--heading);
+  font-weight: 500;
+  box-shadow: 2px 2px 0 var(--border-strong);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), color 0.15s, border-color 0.15s;
+}
+html[data-skin="notebook"] .btn:hover,
+html[data-skin="notebook"] .xr-actions .btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+  transform: translate(-1px, -1px);
+  filter: none;
+}
+html[data-skin="notebook"] .btn.primary,
+html[data-skin="notebook"] main .xr-actions .btn.primary,
+html[data-skin="notebook"] .closing .say-hi {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--heading) 55%, var(--border-strong));
+}
+html[data-skin="notebook"] .btn.primary:hover,
+html[data-skin="notebook"] main .xr-actions .btn.primary:hover,
+html[data-skin="notebook"] .closing .say-hi:hover {
+  color: var(--on-accent);
+  opacity: 1;
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--heading) 70%, var(--border-strong));
+}
+html[data-skin="notebook"] .btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--border-strong); }
+
+/* ---------- Sections as notebook entries ---------- */
+html[data-skin="notebook"] .section > h2 {
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  background: linear-gradient(var(--pencil), var(--pencil)) left bottom / 100% 1px no-repeat;
+}
+html[data-skin="notebook"] main > .section > h2::before {
+  content: "No. " counter(sec, decimal-leading-zero);
+  content: "No. " counter(sec, decimal-leading-zero) / "";
+  display: inline-block;
+  margin-right: 0.7em;
+  padding: 2px 7px 1px;
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--accent-warm);
+  border: 1.4px solid currentColor;
+  border-radius: 3px;
+  transform: rotate(-3deg);
+  vertical-align: 0.32em;
+}
+/* Personal page: dashed page-rule between entries instead of an underline */
+html[data-skin="notebook"] .personal section { border-top: 1px dashed var(--border-strong); }
+html[data-skin="notebook"] .personal section.hero { border-top: 0; }
+html[data-skin="notebook"] .personal .section > h2 { background: none; padding-bottom: 0; }
+
+/* ---------- Cards: taped-in index cards ---------- */
+html[data-skin="notebook"] .card,
+html[data-skin="notebook"] .xr-compare .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s;
+}
+/* The site's hover beam becomes a strip of masking tape */
+html[data-skin="notebook"] .card::before {
+  top: -11px;
+  left: 50%;
+  right: auto;
+  width: 92px;
+  height: 22px;
+  border-radius: 0;
+  opacity: 1;
+  transform: translateX(-50%) rotate(-2.5deg);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 6px),
+    var(--tape);
+  box-shadow: 0 0 0 0.5px var(--tape-edge);
+  clip-path: polygon(0 8%, 5% 0, 30% 6%, 60% 0, 95% 5%, 100% 0, 97% 50%, 100% 100%, 70% 94%, 35% 100%, 4% 95%, 0 100%, 3% 50%);
+}
+html[data-skin="notebook"] .card:nth-of-type(even)::before { transform: translateX(-50%) rotate(2deg); left: 46%; }
+html[data-skin="notebook"] main .card:hover::before,
+html[data-skin="notebook"] .card.flagship::before { transform: translateX(-50%) rotate(-2.5deg); opacity: 1; }
+html[data-skin="notebook"] main .card:nth-of-type(even):hover::before { transform: translateX(-50%) rotate(2deg); }
+html[data-skin="notebook"] main .card:hover {
+  transform: none;
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-strong);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-skin="notebook"] main .card:hover { transform: translateY(-2px) rotate(-0.5deg); }
+  html[data-skin="notebook"] main .card:nth-of-type(even):hover { transform: translateY(-2px) rotate(0.5deg); }
+}
+
+/* Flagship: an index card with the classic red header rule under the kicker */
+html[data-skin="notebook"] main .card.flagship { border-color: var(--border-strong); }
+html[data-skin="notebook"] main .card.flagship .kicker {
+  margin: 0 -24px 12px;
+  padding: 0 24px 8px;
+  border-bottom: 1px solid var(--margin-rule);
+}
+@media (max-width: 600px) {
+  html[data-skin="notebook"] main .card.flagship .kicker { margin: 0 -16px 12px; padding: 0 16px 8px; }
+}
+
+html[data-skin="notebook"] main .card .kicker,
+html[data-skin="notebook"] .card .kicker {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--muted);
+}
+html[data-skin="notebook"] .card .kicker::before { width: 16px; height: 1.5px; background: var(--pencil); }
+html[data-skin="notebook"] .card.flagship .kicker { color: var(--accent-warm); }
+html[data-skin="notebook"] .card.flagship .kicker::before { background: currentColor; }
+
+html[data-skin="notebook"] .status {
+  font-style: italic;
+  color: var(--muted);
+  padding-left: 12px;
+  border-left: 2px dashed var(--pencil);
+}
+
+/* Tags: pencilled labels */
+html[data-skin="notebook"] .tag,
+html[data-skin="notebook"] .chip,
+html[data-skin="notebook"] .xr-hero .xr-tags .tag,
+html[data-skin="notebook"] .teach-tags .chip {
+  font-size: 0.76rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 2px 9px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent-soft) 70%, transparent);
+  color: var(--accent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Video: mounted on a paper frame */
+html[data-skin="notebook"] .media-embed,
+html[data-skin="notebook"] .xr-video .media-embed {
+  border-radius: 2px;
+  border: 0;
+  margin: 8px 0 18px;
+  box-shadow: 0 0 0 6px var(--polaroid), 0 0 0 7px color-mix(in srgb, var(--border-strong) 60%, transparent), 0 12px 24px -12px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- News & publications ---------- */
+html[data-skin="notebook"] .news li { border-bottom: 1px dashed var(--border-strong); }
+html[data-skin="notebook"] .news li time,
+html[data-skin="notebook"] .news time {
+  color: var(--accent-warm);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+}
+
+html[data-skin="notebook"] #publications .pub-group,
+html[data-skin="notebook"] .pub-group {
+  width: fit-content;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--heading);
+  padding: 0 4px;
+  background: linear-gradient(transparent 52%, var(--highlight) 52%, var(--highlight) 92%, transparent 92%);
+}
+html[data-skin="notebook"] .pubs li { border-bottom: 1px dashed var(--border); }
+html[data-skin="notebook"] .pubs li::before {
+  border-radius: 50%;
+  background: none;
+  border: 1.6px solid var(--accent);
+  width: 0.5rem;
+  height: 0.5rem;
+}
+html[data-skin="notebook"] .pubs strong {
+  font-weight: 800;
+  color: var(--heading);
+  background: linear-gradient(transparent 60%, var(--highlight) 60%);
+  padding: 0 1px;
+}
+html[data-skin="notebook"] .pubs a.pub-title { color: var(--heading); text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+html[data-skin="notebook"] .pubs a.pub-title:hover { color: var(--accent); }
+html[data-skin="notebook"] .pub-meta { color: var(--muted); }
+
+/* ---------- Personal page ---------- */
+html[data-skin="notebook"] .personal .eyebrow {
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--accent-warm);
+}
+html[data-skin="notebook"] .personal .avatar {
+  border-radius: 2px;
+  border: 0;
+  padding: 4px 4px 12px;
+  width: 88px;
+  height: 100px;
+  background: var(--polaroid);
+  box-shadow: var(--shadow);
+  transform: rotate(-3deg);
+}
+html[data-skin="notebook"] .personal .lede { color: var(--text); }
+html[data-skin="notebook"] .fun-card .fun-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-warm);
+}
+html[data-skin="notebook"] .fun-card p:not(.fun-label) { color: var(--muted); }
+
+html[data-skin="notebook"] .now-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--margin-rule);
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+/* Margin-note labels in handwriting */
+html[data-skin="notebook"] .personal .now-list .label,
+html[data-skin="notebook"] .now-list .label {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.1;
+  color: var(--accent);
+}
+
+html[data-skin="notebook"] .personal h3.gallery-group {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+html[data-skin="notebook"] .gallery { gap: 1rem 0.85rem; }
+html[data-skin="notebook"] .gallery figure {
+  background: var(--polaroid);
+  padding: 7px 7px 4px;
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+html[data-skin="notebook"] .gallery a,
+html[data-skin="notebook"] .gallery img { border-radius: 1px; }
+html[data-skin="notebook"] .gallery figcaption {
+  font-family: var(--font-hand);
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #3a4250;
+  margin-top: 0.3rem;
+  padding: 0 2px 2px;
+}
+html[data-skin="notebook"] .gallery figure:hover { box-shadow: var(--shadow-hover); }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-skin="notebook"] .gallery figure:hover { transform: rotate(-1deg); }
+  html[data-skin="notebook"] .gallery figure:nth-child(even):hover { transform: rotate(1deg); }
+}
+
+/* ---------- Project page ---------- */
+html[data-skin="notebook"] .xr-page { counter-reset: fig; }
+html[data-skin="notebook"] .xr-hero .xr-kicker {
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--accent-warm);
+}
+html[data-skin="notebook"] .xr-summary { color: var(--muted); }
+html[data-skin="notebook"] .xr-authors { color: var(--muted); }
+html[data-skin="notebook"] .xr-authors strong {
+  color: var(--heading);
+  background: linear-gradient(transparent 60%, var(--highlight) 60%);
+}
+html[data-skin="notebook"] .xr-page a { color: var(--accent); }
+html[data-skin="notebook"] .xr-caption {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+/* Figures: a light page taped into the notebook (stays light in dark mode, since the
+   diagrams are white-background images) */
+html[data-skin="notebook"] .xr-page .xr-figure {
+  --text: var(--mat-text);
+  --muted: var(--mat-muted);
+  --accent: var(--mat-accent);
+  --accent-warm: var(--mat-warm);
+  position: relative;
+  margin: 30px 0 12px;
+  padding: 14px 14px 12px;
+  background: var(--mat);
+  border: 1px solid color-mix(in srgb, var(--border-strong) 45%, transparent);
+  border-radius: 2px;
+  box-shadow: var(--shadow);
+}
+html[data-skin="notebook"] .xr-page .xr-figure::before,
+html[data-skin="notebook"] .xr-page .xr-figure::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 58px;
+  height: 18px;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 6px),
+    rgba(236, 222, 168, 0.8);
+  box-shadow: 0 0 0 0.5px rgba(150, 130, 70, 0.2);
+  clip-path: polygon(0 8%, 5% 0, 30% 6%, 60% 0, 95% 5%, 100% 0, 97% 50%, 100% 100%, 70% 94%, 35% 100%, 4% 95%, 0 100%, 3% 50%);
+  pointer-events: none;
+}
+html[data-skin="notebook"] .xr-page .xr-figure::before { left: -12px; transform: rotate(-38deg); }
+html[data-skin="notebook"] .xr-page .xr-figure::after { right: -12px; transform: rotate(38deg); }
+html[data-skin="notebook"] .xr-figure img {
+  border-radius: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+/* Captions as margin notes */
+html[data-skin="notebook"] .xr-figure figcaption {
+  font-size: 0.88rem;
+  color: var(--mat-muted);
+  margin-top: 10px;
+  padding-left: 10px;
+  border-left: 2px solid color-mix(in srgb, var(--mat-warm) 55%, transparent);
+}
+html[data-skin="notebook"] .xr-figure figcaption::before {
+  counter-increment: fig;
+  content: "Fig. " counter(fig) "  ";
+  font-family: var(--font-hand);
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--mat-warm);
+  margin-right: 0.35em;
+}
+
+html[data-skin="notebook"] .xr-compare .card.chosen,
+html[data-skin="notebook"] .xr-page .xr-compare .card.chosen { border-color: var(--accent); }
+
+/* Checklist: hand-ticked boxes */
+html[data-skin="notebook"] .xr-checklist li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+html[data-skin="notebook"] .xr-checklist li::before {
+  border-radius: 3px;
+  background: transparent;
+  border: 1.6px solid var(--accent);
+  transform: rotate(-3deg);
+}
+html[data-skin="notebook"] .xr-checklist li::after {
+  border-color: var(--accent-warm);
+  border-width: 0 2.4px 2.4px 0;
+  left: 21px;
+  top: 16px;
+  height: 11px;
+}
+html[data-skin="notebook"] .xr-checklist strong { color: var(--heading); }
+html[data-skin="notebook"] .xr-checklist span { color: var(--muted); }
+
+/* Status: a sticky note */
+html[data-skin="notebook"] .xr-page .xr-status {
+  background: var(--note-bg);
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 2px 2px 0;
+  color: var(--muted);
+  box-shadow: var(--shadow);
+}
+html[data-skin="notebook"] .xr-status strong { color: var(--heading); }
+
+/* ---------- Footer ---------- */
+html[data-skin="notebook"] body > .footer,
+html[data-skin="notebook"] .footer {
+  border-top: 1px dashed var(--border-strong);
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin="notebook"] main .card:hover,
+  html[data-skin="notebook"] .gallery figure:hover,
+  html[data-skin="notebook"] .btn:hover { transform: none; }
+}

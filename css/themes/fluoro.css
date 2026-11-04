@@ -1,0 +1,548 @@
+/* Theme: "fluoro" (fluoroscopy monitor)
+   Intentionally DARK-ONLY: near-black clinical greys, one pale-cyan phosphor accent, a very faint
+   scanline + vignette texture, IBM Plex Mono for readouts (labels, dates, tags), IBM Plex Sans for text.
+   prefers-color-scheme: light is deliberately ignored; the page always renders as a dark monitor.
+   Loaded after site.css and the per-page <style> blocks via ?theme=fluoro (sets html[data-skin="fluoro"]). */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+
+/* ---------- Tokens (specificity 0,2,1 beats site.css :root:not([data-theme]) ) ---------- */
+html:root[data-skin="fluoro"] {
+  --bg: #0a0d0e;
+  --surface: #101415;
+  --surface-2: #151a1c;
+  --text: #dde5e5;
+  --muted: #95a4a6;
+  --accent: #9fe4dc;          /* pale cyan phosphor */
+  --accent-soft: #12201f;
+  --accent-warm: #b9c7c6;     /* single-accent theme: "secondary" is a cool grey, not amber */
+  --warm-soft: #161b1c;
+  --on-accent: #051010;
+  --border: #242c2e;
+  --hair: #1c2325;
+  --phos-dim: rgba(159, 228, 220, 0.32);
+  --phos-faint: rgba(159, 228, 220, 0.12);
+  --glow: rgba(159, 228, 220, 0.10);
+  --glow-warm: transparent;
+  --grid-minor: transparent;
+  --grid-major: transparent;
+  --shadow: none;
+  --shadow-hover: none;
+  --radius: 4px;
+  --font-body: "IBM Plex Sans", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "IBM Plex Sans", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+/* ---------- Base: plain dark glass + vignette, scanlines on a fixed layer behind content ---------- */
+html[data-skin="fluoro"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse 120% 90% at 50% 30%, #111617 0%, var(--bg) 60%, #050707 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.68;
+}
+html[data-skin="fluoro"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(159, 228, 220, 0.022) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 85% 75% at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+html[data-skin="fluoro"] ::selection { background: var(--accent); color: var(--on-accent); }
+
+html[data-skin="fluoro"] h1,
+html[data-skin="fluoro"] h2,
+html[data-skin="fluoro"] h3,
+html[data-skin="fluoro"] .personal h1,
+html[data-skin="fluoro"] .personal h2,
+html[data-skin="fluoro"] .personal h3,
+html[data-skin="fluoro"] .xr-hero h1,
+html[data-skin="fluoro"] .xr-page h2 {
+  font-family: var(--font-head);
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+html[data-skin="fluoro"] h1 { font-weight: 600; letter-spacing: -0.02em; }
+html[data-skin="fluoro"] strong { font-weight: 600; color: var(--text); }
+
+html[data-skin="fluoro"] a { color: var(--accent); }
+html[data-skin="fluoro"] a:hover { text-decoration-color: var(--phos-dim); }
+
+html[data-skin="fluoro"] :focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px var(--phos-faint);
+}
+
+/* Mono readout type */
+html[data-skin="fluoro"] .kicker,
+html[data-skin="fluoro"] .xr-kicker,
+html[data-skin="fluoro"] .eyebrow,
+html[data-skin="fluoro"] .pub-group,
+html[data-skin="fluoro"] .tag,
+html[data-skin="fluoro"] .chip,
+html[data-skin="fluoro"] .news time,
+html[data-skin="fluoro"] .now-list .label,
+html[data-skin="fluoro"] .fun-card .fun-label,
+html[data-skin="fluoro"] .xr-legend,
+html[data-skin="fluoro"] .xr-caption,
+html[data-skin="fluoro"] .gallery figcaption,
+html[data-skin="fluoro"] .footer,
+html[data-skin="fluoro"] .btn,
+html[data-skin="fluoro"] .open-note,
+html[data-skin="fluoro"] .site-nav .nav-links {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 1;
+}
+
+/* ---------- Navigation: monitor title bar ---------- */
+html[data-skin="fluoro"] body > .site-nav {
+  background: rgba(8, 11, 12, 0.88);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--phos-faint);
+}
+html[data-skin="fluoro"] .site-nav .brand {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+html[data-skin="fluoro"] .site-nav .brand::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--phos-faint), 0 0 8px var(--glow);
+}
+html[data-skin="fluoro"] .site-nav .nav-links { font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; gap: 2px 18px; }
+html[data-skin="fluoro"] .site-nav .nav-links a { color: var(--muted); }
+html[data-skin="fluoro"] .site-nav .nav-links a::after { height: 1px; border-radius: 0; background: var(--accent); }
+html[data-skin="fluoro"] .site-nav .nav-links a:hover,
+html[data-skin="fluoro"] .site-nav .nav-links a[aria-current="page"] { color: var(--accent); }
+@media (max-width: 600px) {
+  html[data-skin="fluoro"] .site-nav .nav-links { gap: 2px 12px; font-size: 0.72rem; letter-spacing: 0.05em; }
+}
+
+/* ---------- Hero: readout panel with bracketed frame and a status line ---------- */
+html[data-skin="fluoro"] .hero,
+html[data-skin="fluoro"] .xr-hero {
+  position: relative;
+  margin-top: 32px;
+  padding: 34px 30px 26px;
+  border: 1px solid var(--hair);
+  background: linear-gradient(to bottom, rgba(159, 228, 220, 0.025), transparent 60%), rgba(16, 20, 21, 0.6);
+}
+html[data-skin="fluoro"] .personal section.hero { padding: 34px 30px 26px; border-top: 1px solid var(--hair); }
+/* corner brackets */
+html[data-skin="fluoro"] .hero::before,
+html[data-skin="fluoro"] .xr-hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  --c: var(--phos-dim);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 16px 1px,
+    linear-gradient(var(--c), var(--c)) top left / 1px 16px,
+    linear-gradient(var(--c), var(--c)) top right / 16px 1px,
+    linear-gradient(var(--c), var(--c)) top right / 1px 16px,
+    linear-gradient(var(--c), var(--c)) bottom left / 16px 1px,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px 16px,
+    linear-gradient(var(--c), var(--c)) bottom right / 16px 1px,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px 16px;
+  background-repeat: no-repeat;
+}
+/* status line sitting on the top edge */
+html[data-skin="fluoro"] .hero::after,
+html[data-skin="fluoro"] .xr-hero::after {
+  position: absolute;
+  top: -0.75em;
+  left: 22px;
+  padding: 0 8px;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+html[data-skin="fluoro"] main > .hero::after { content: "CH 01 · Profile · Readout" / ""; }
+html[data-skin="fluoro"] .personal .hero::after { content: "CH 02 · Off duty" / ""; }
+html[data-skin="fluoro"] .xr-hero::after { content: "CH 03 · Project file" / ""; }
+@media (max-width: 680px) {
+  html[data-skin="fluoro"] .hero,
+  html[data-skin="fluoro"] .xr-hero,
+  html[data-skin="fluoro"] .personal section.hero { padding: 28px 16px 20px; margin-top: 24px; }
+  html[data-skin="fluoro"] .hero::after,
+  html[data-skin="fluoro"] .xr-hero::after { left: 12px; }
+}
+
+html[data-skin="fluoro"] .hero h1::after,
+html[data-skin="fluoro"] .xr-hero h1::after {
+  width: 56px;
+  height: 1px;
+  margin-top: 0.4em;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--glow);
+}
+html[data-skin="fluoro"] .hero .statement {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.18rem;
+  color: var(--accent);
+}
+html[data-skin="fluoro"] .hero .affil {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+html[data-skin="fluoro"] .xr-summary { color: #b9c5c6; }
+html[data-skin="fluoro"] .xr-authors { color: var(--muted); }
+
+/* Portrait: square-ish detector window with hairline frame */
+html[data-skin="fluoro"] .hero .photo-wrap .photo,
+html[data-skin="fluoro"] .hero .photo {
+  border-radius: 3px;
+  border: 0;
+  box-shadow: 0 0 0 1px var(--border), 0 0 0 5px var(--bg), 0 0 0 6px var(--phos-faint);
+  filter: saturate(0.85) contrast(1.02);
+}
+html[data-skin="fluoro"] .hero .photo-wrap::before { --c: var(--phos-dim); inset: -12px; }
+html[data-skin="fluoro"] .hero .photo-wrap::after { border-radius: 3px; }
+
+/* "Open to PhD positions" status indicator */
+html[data-skin="fluoro"] .open-note {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--phos-dim);
+  border-radius: 2px;
+  padding: 4px 12px 4px 10px;
+}
+html[data-skin="fluoro"] .open-note::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- Buttons: instrument keys ---------- */
+html[data-skin="fluoro"] .btn,
+html[data-skin="fluoro"] .xr-actions .btn,
+html[data-skin="fluoro"] .closing .say-hi {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: none;
+}
+html[data-skin="fluoro"] .btn:hover,
+html[data-skin="fluoro"] .xr-actions .btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-2);
+  box-shadow: 0 0 0 3px var(--phos-faint);
+}
+html[data-skin="fluoro"] .btn.primary,
+html[data-skin="fluoro"] main .xr-actions .btn.primary,
+html[data-skin="fluoro"] .closing .say-hi {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+html[data-skin="fluoro"] .btn.primary:hover,
+html[data-skin="fluoro"] main .xr-actions .btn.primary:hover,
+html[data-skin="fluoro"] .closing .say-hi:hover {
+  color: var(--on-accent);
+  background: #b8eee8;
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--phos-faint), 0 0 18px var(--glow);
+}
+
+/* ---------- Section headings: [01] channel index ---------- */
+html[data-skin="fluoro"] .section > h2 {
+  font-size: clamp(1.3rem, 3.2vw, 1.5rem);
+  background:
+    linear-gradient(var(--accent), var(--accent)) left bottom / 28px 1px no-repeat,
+    linear-gradient(var(--border), var(--border)) left bottom / 100% 1px no-repeat;
+}
+html[data-skin="fluoro"] main > .section > h2::before {
+  content: "[" counter(sec, decimal-leading-zero) "]";
+  content: "[" counter(sec, decimal-leading-zero) "]" / "";
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.6em;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+html[data-skin="fluoro"] .personal section { border-top-color: var(--hair); }
+html[data-skin="fluoro"] .muted,
+html[data-skin="fluoro"] .section-lead { color: var(--muted); }
+
+/* ---------- Cards: instrument panels ---------- */
+html[data-skin="fluoro"] .card,
+html[data-skin="fluoro"] .xr-compare .card,
+html[data-skin="fluoro"] .fun-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+html[data-skin="fluoro"] .card::before {
+  top: -1px;
+  left: 0;
+  right: auto;
+  width: 40px;
+  height: 1px;
+  border-radius: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+}
+html[data-skin="fluoro"] main .card:hover {
+  transform: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  border-color: #33403f;
+}
+html[data-skin="fluoro"] main .card:hover::before { transform: scaleX(1); }
+html[data-skin="fluoro"] main .card.flagship {
+  background: linear-gradient(to bottom, rgba(159, 228, 220, 0.035), transparent 220px), var(--surface);
+  border-color: rgba(159, 228, 220, 0.28);
+}
+html[data-skin="fluoro"] .card.flagship::before { transform: scaleX(1); opacity: 1; width: 64px; }
+
+html[data-skin="fluoro"] main .card .kicker,
+html[data-skin="fluoro"] .card .kicker {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+html[data-skin="fluoro"] .card .kicker::before { width: 10px; background: var(--accent); }
+html[data-skin="fluoro"] .card.flagship .kicker { color: var(--accent); }
+html[data-skin="fluoro"] .card h3 { font-weight: 500; }
+html[data-skin="fluoro"] .status { color: var(--muted); font-style: normal; font-size: 0.88rem; }
+html[data-skin="fluoro"] .card ul li::marker,
+html[data-skin="fluoro"] .facts li::marker { color: var(--accent); }
+
+/* Tags & teaching chips: bracketed readout labels */
+html[data-skin="fluoro"] .tag,
+html[data-skin="fluoro"] .chip,
+html[data-skin="fluoro"] .xr-tags .tag,
+html[data-skin="fluoro"] .xr-hero .xr-tags .tag,
+html[data-skin="fluoro"] .teach-tags .chip {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: rgba(159, 228, 220, 0.05);
+  color: var(--accent);
+  border: 1px solid rgba(159, 228, 220, 0.22);
+}
+
+/* ---------- The video: centrepiece monitor ---------- */
+html[data-skin="fluoro"] .media-embed,
+html[data-skin="fluoro"] .xr-video .media-embed {
+  border-radius: 3px;
+  border: 1px solid rgba(159, 228, 220, 0.35);
+  background: #000;
+  margin: 12px 0 20px;
+  box-shadow:
+    0 0 0 6px #070909,
+    0 0 0 7px var(--border),
+    0 0 40px rgba(159, 228, 220, 0.06);
+}
+html[data-skin="fluoro"] .xr-video { margin: 30px 0 8px; }
+html[data-skin="fluoro"] .xr-caption { font-size: 0.76rem; letter-spacing: 0.03em; color: var(--muted); }
+
+/* ---------- News: timestamped log ---------- */
+html[data-skin="fluoro"] .news li { border-bottom: 1px dotted var(--border); }
+html[data-skin="fluoro"] .news li time,
+html[data-skin="fluoro"] .news time {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 3px;
+}
+
+/* ---------- Publications ---------- */
+html[data-skin="fluoro"] #publications .pub-group,
+html[data-skin="fluoro"] .pub-group {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+html[data-skin="fluoro"] #publications .pub-group::before { content: "// "; color: var(--accent); }
+html[data-skin="fluoro"] .pubs li { border-bottom: 1px solid var(--hair); }
+html[data-skin="fluoro"] .pubs li::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--glow);
+}
+html[data-skin="fluoro"] .pubs li:hover { background-color: rgba(159, 228, 220, 0.025); }
+html[data-skin="fluoro"] .pubs strong { font-weight: 700; color: #f2f7f7; }
+html[data-skin="fluoro"] .pub-title,
+html[data-skin="fluoro"] .pubs a.pub-title { font-weight: 500; color: var(--text); }
+html[data-skin="fluoro"] .pubs a.pub-title { text-decoration-color: var(--phos-dim); }
+html[data-skin="fluoro"] .pubs a.pub-title:hover { color: var(--accent); }
+html[data-skin="fluoro"] .pub-meta { color: var(--muted); }
+
+/* ---------- Personal page ---------- */
+html[data-skin="fluoro"] .personal .eyebrow,
+html[data-skin="fluoro"] .eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+html[data-skin="fluoro"] .personal .avatar {
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px var(--border), 0 0 0 4px var(--bg), 0 0 0 5px var(--phos-faint);
+  filter: saturate(0.85);
+}
+html[data-skin="fluoro"] .lede { color: var(--text); }
+html[data-skin="fluoro"] .fun-card .fun-label { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--accent); }
+html[data-skin="fluoro"] .fun-card p { color: var(--muted); }
+html[data-skin="fluoro"] .fun-card .fun-label { color: var(--accent); }
+
+html[data-skin="fluoro"] .now-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+html[data-skin="fluoro"] .personal .now-list .label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 0.2rem;
+}
+
+html[data-skin="fluoro"] .personal .gallery-group {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--hair);
+}
+html[data-skin="fluoro"] .personal .gallery-group::before { content: "▸ "; content: "▸ " / ""; color: var(--accent); }
+html[data-skin="fluoro"] .gallery a {
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: #000;
+}
+html[data-skin="fluoro"] .gallery img { border-radius: 0; }
+html[data-skin="fluoro"] .gallery a:hover { border-color: var(--phos-dim); }
+html[data-skin="fluoro"] .gallery figcaption {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+html[data-skin="fluoro"] .ph {
+  background: repeating-linear-gradient(45deg, transparent 0 10px, rgba(159, 228, 220, 0.04) 10px 20px), var(--surface);
+  border: 1px dashed var(--border);
+  color: var(--muted);
+}
+
+/* ---------- Project page ---------- */
+html[data-skin="fluoro"] .xr-kicker,
+html[data-skin="fluoro"] .xr-hero .xr-kicker {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+/* Figures: dark instrument panel, diagrams on a light mat so the white PNG/JPGs stay readable */
+html[data-skin="fluoro"] .xr-page .xr-figure {
+  background: var(--surface);
+  background-image: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 14px 12px;
+}
+html[data-skin="fluoro"] .xr-figure img {
+  background: #f3f5f5;
+  padding: 8px;
+  border-radius: 2px;
+  border: 1px solid #2c3537;
+}
+html[data-skin="fluoro"] .xr-figure figcaption {
+  font-size: 0.86rem;
+  color: var(--muted);
+  border-top: 1px solid var(--hair);
+  padding-top: 10px;
+}
+html[data-skin="fluoro"] .xr-checklist li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+html[data-skin="fluoro"] .xr-checklist li::before {
+  border-radius: 2px;
+  background: transparent;
+  border: 1px solid var(--accent);
+}
+html[data-skin="fluoro"] .xr-checklist li::after { border-color: var(--accent); }
+html[data-skin="fluoro"] .xr-checklist span { color: var(--muted); }
+html[data-skin="fluoro"] .xr-page .xr-status {
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+}
+html[data-skin="fluoro"] .xr-page .xr-compare .card.chosen { border-color: rgba(159, 228, 220, 0.45); }
+
+/* ---------- Footer ---------- */
+html[data-skin="fluoro"] body > .footer {
+  border-top: 1px solid var(--hair);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+html[data-skin="fluoro"] body > .footer a { text-transform: none; letter-spacing: 0.02em; }
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin="fluoro"] .open-note::before { animation: none; }
+  html[data-skin="fluoro"] .gallery img { transition: none; }
+}
