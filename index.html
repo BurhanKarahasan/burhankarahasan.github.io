@@ -213,8 +213,8 @@
         <li><strong>Hardware:</strong> three motorized linear stages, plus a servo and a stepper at the end-effector.</li>
         <li><strong>Feedback:</strong> live images tapped from the X-ray unit, with calibration between image and stage coordinates.</li>
         <li><strong>Perception:</strong> I adapted an existing neural-network detector from prior published work to locate the robot in each frame.</li>
-        <li><strong>Control:</strong> a finite-state machine that sends small stepwise position commands. I chose it over PID because the
-          stepper stages are driven over USB with latency, which made continuous feedback unreliable; the state machine gave stable, precise navigation.</li>
+        <li><strong>Control:</strong> a finite-state machine in place of PID, with dedicated states for real-time stepwise navigation,
+          occlusion removal and stall recovery. Delayed, discrete stepper actuation made continuous PID feedback unreliable; the state machine gave stable, precise navigation.</li>
       </ul>
       <p class="status">Presented as a poster at the 7th Turkish Robotics Conference (July 2026); a first-author journal manuscript extending it is in preparation.</p>
       <div class="btn-row">

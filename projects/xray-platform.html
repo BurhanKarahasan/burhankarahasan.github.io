@@ -224,8 +224,8 @@
 
     <section class="section" id="fsm">
       <h2>Why a state machine instead of PID</h2>
-      <p>PID was the first approach we considered. It fell short on this hardware: the platform is driven by stepper motors commanded over USB, and that link adds latency between deciding on a command and the motor executing it. Continuous feedback became unreliable.</p>
-      <p>So I matched the control structure to the actuators. Autonomous operation is organized as a finite-state machine that sends small, rate-limited position steps, prevents contradictory commands, and keeps going when perception drops out or progress stalls. This gave stable, precise navigation.</p>
+      <p>PID was the first approach we considered. It fell short for two reasons. The platform is driven by stepper motors commanded over USB, so actuation is delayed and discrete, and continuous feedback became unreliable. And under X-ray the robot can be occluded or stall, which a single feedback law does not handle.</p>
+      <p>So I matched the control structure to the system. Autonomous operation is organized as a finite-state machine with dedicated states for real-time navigation, occlusion removal and stall recovery. It sends small, rate-limited position steps, prevents contradictory commands, and keeps going when perception drops out or progress stalls. This gave stable, precise navigation.</p>
       <figure class="xr-figure">
         <img src="img/fsm.jpg" alt="Finite-state machine: WAIT_VISION, a track-and-pull law with ORBIT, LEAD and CREEP states, recovery states BLIND_LEAD and STALL_HOLD, MANUAL_HOLD override, and DONE" loading="lazy">
         <figcaption>The autonomous control state machine. A single track-and-pull law (ORBIT–LEAD–CREEP) is guarded by recovery states: BLIND_LEAD bridges vision dropouts and STALL_HOLD freezes the pose when progress stalls, while manual override is always available.</figcaption>
