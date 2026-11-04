@@ -1,0 +1,530 @@
+/* Shared stylesheet for burhankarahasan.github.io
+   Theme: "radiograph / blueprint". Deep blue-black film in dark mode, cool drafting paper in light mode,
+   cyan beam accents with a warm amber secondary, a faint engineering grid behind the page header,
+   and JetBrains Mono for small technical labels.
+   Fonts: Inter (body) and Source Serif 4 (headings) are loaded per page; JetBrains Mono is imported here. */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #f3f6f8;
+  --surface: #ffffff;
+  --surface-2: #f8fafb;
+  --text: #0e1a22;
+  --muted: #4a5a66;
+  --accent: #08697a;
+  --accent-soft: #dcf0f3;
+  --accent-warm: #a14a0c;
+  --warm-soft: #fbeadb;
+  --on-accent: #ffffff;
+  --border: #d5dee4;
+  --grid-minor: rgba(8, 80, 110, 0.05);
+  --grid-major: rgba(8, 80, 110, 0.085);
+  --glow: rgba(8, 105, 122, 0.16);
+  --glow-warm: rgba(161, 74, 12, 0.07);
+  --shadow: 0 1px 2px rgba(10, 30, 45, 0.05), 0 6px 20px rgba(10, 30, 45, 0.045);
+  --shadow-hover: 0 2px 4px rgba(10, 30, 45, 0.06), 0 14px 32px rgba(8, 80, 110, 0.13);
+  --radius: 12px;
+  --maxw: 880px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #060b12;
+    --surface: #0c1520;
+    --surface-2: #101c29;
+    --text: #e4eef4;
+    --muted: #95a8b6;
+    --accent: #56d6e4;
+    --accent-soft: #0d2a35;
+    --accent-warm: #f4a85e;
+    --warm-soft: #2e1e10;
+    --on-accent: #04121a;
+    --border: #1b2a38;
+    --grid-minor: rgba(110, 200, 230, 0.045);
+    --grid-major: rgba(110, 200, 230, 0.08);
+    --glow: rgba(86, 214, 228, 0.2);
+    --glow-warm: rgba(244, 168, 94, 0.06);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    --shadow-hover: 0 0 0 1px rgba(86, 214, 228, 0.22), 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 36px rgba(86, 214, 228, 0.1);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #060b12;
+  --surface: #0c1520;
+  --surface-2: #101c29;
+  --text: #e4eef4;
+  --muted: #95a8b6;
+  --accent: #56d6e4;
+  --accent-soft: #0d2a35;
+  --accent-warm: #f4a85e;
+  --warm-soft: #2e1e10;
+  --on-accent: #04121a;
+  --border: #1b2a38;
+  --grid-minor: rgba(110, 200, 230, 0.045);
+  --grid-major: rgba(110, 200, 230, 0.08);
+  --glow: rgba(86, 214, 228, 0.2);
+  --glow-warm: rgba(244, 168, 94, 0.06);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 0 0 1px rgba(86, 214, 228, 0.22), 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 36px rgba(86, 214, 228, 0.1);
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+/* Blueprint grid + beam glow behind the page header. Uses `html body` so it wins over the
+   per-page `body { background: ... }` shorthands. The top layer fades the grid out down the page. */
+html body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to bottom, transparent 0, transparent 160px, color-mix(in srgb, var(--bg) 72%, transparent) 1100px),
+    radial-gradient(ellipse 70% 520px at 50% -120px, var(--glow), transparent 70%),
+    radial-gradient(ellipse 40% 380px at 100% 0, var(--glow-warm), transparent 70%),
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: 0 0, 0 0, 0 0, center -1px, center 0, center -1px, center 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, repeat, repeat;
+}
+
+::selection { background: var(--accent); color: var(--on-accent); }
+
+img, iframe, video { max-width: 100%; }
+img { height: auto; display: block; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--text);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.1rem, 5.4vw, 2.9rem); letter-spacing: -0.018em; line-height: 1.1; }
+h2 { font-size: clamp(1.4rem, 3.4vw, 1.65rem); letter-spacing: -0.008em; }
+h3 { font-size: 1.2rem; letter-spacing: -0.004em; }
+p { margin: 0 0 1em; }
+strong { font-weight: 600; }
+
+.container, main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Mono for small technical labels across the three pages */
+.kicker, .xr-kicker, .eyebrow, .pub-group, .tag, .chip,
+.news time, .now-list .label, .xr-legend, .xr-caption, .footer {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 0, "calt" 0;
+}
+
+/* ---------- Navigation ---------- */
+body > .site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 20px;
+  max-width: none;
+  margin: 0;
+  padding: 10px max(16px, calc((100% - var(--maxw)) / 2 + 16px));
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  backdrop-filter: blur(10px) saturate(1.2);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.site-nav .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+}
+/* Small "beam spot" mark next to the name */
+.site-nav .brand::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 12%, var(--accent) 45%, color-mix(in srgb, var(--accent) 40%, transparent) 100%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent), 0 0 12px var(--glow);
+}
+.site-nav .brand:hover { text-decoration: none; color: var(--accent); }
+.site-nav .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  font-size: 0.92rem;
+}
+.site-nav .nav-links a {
+  position: relative;
+  color: var(--muted);
+  padding: 2px 0;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.site-nav .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a[aria-current="page"] { color: var(--accent); text-decoration: none; }
+.site-nav .nav-links a:hover::after,
+.site-nav .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+@media (max-width: 600px) {
+  html { scroll-padding-top: 128px; }
+  body > .site-nav { padding: 8px 16px; }
+  .site-nav .nav-links { gap: 2px 12px; font-size: 0.88rem; }
+}
+
+/* ---------- Hero (index, personal, project) ---------- */
+.hero h1::after,
+.xr-hero h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 0.32em;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+}
+
+/* Portrait framed like a detector region of interest: corner brackets + a one-off scan sweep */
+.hero .photo-wrap {
+  position: relative;
+  width: fit-content;
+  isolation: isolate;
+}
+.hero .photo-wrap .photo {
+  border: 0;
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--accent) 45%, var(--border)), 0 0 40px var(--glow);
+}
+.hero .photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  pointer-events: none;
+  --c: color-mix(in srgb, var(--accent) 75%, transparent);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 18px 2px,
+    linear-gradient(var(--c), var(--c)) top left / 2px 18px,
+    linear-gradient(var(--c), var(--c)) top right / 18px 2px,
+    linear-gradient(var(--c), var(--c)) top right / 2px 18px,
+    linear-gradient(var(--c), var(--c)) bottom left / 18px 2px,
+    linear-gradient(var(--c), var(--c)) bottom left / 2px 18px,
+    linear-gradient(var(--c), var(--c)) bottom right / 18px 2px,
+    linear-gradient(var(--c), var(--c)) bottom right / 2px 18px;
+  background-repeat: no-repeat;
+}
+.hero .photo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 44%, color-mix(in srgb, var(--accent) 38%, transparent) 50%, transparent 56%) 0 100% / 100% 300% no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+/* "Open to PhD positions" status dot glows */
+.open-note::before {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 0 10px var(--glow);
+}
+
+/* ---------- Sections & cards ---------- */
+main { counter-reset: sec; }
+.section {
+  padding: 40px 0 8px;
+}
+.section > h2 {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 0;
+  background:
+    linear-gradient(var(--accent), var(--accent)) left bottom / 44px 2px no-repeat,
+    linear-gradient(var(--border), var(--border)) left bottom / 100% 1px no-repeat;
+}
+/* Technical-drawing style section index: 01, 02, ... */
+main > .section > h2::before {
+  counter-increment: sec;
+  content: counter(sec, decimal-leading-zero);
+  content: counter(sec, decimal-leading-zero) / "";
+  display: inline-block;
+  margin-right: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  vertical-align: 0.22em;
+}
+/* Personal page sections already carry a top rule, so skip the h2 underline there */
+.personal .section > h2 { background: none; padding-bottom: 0; }
+.section-lead { color: var(--muted); margin-top: -8px; }
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s;
+}
+/* Beam line that sweeps across the top edge on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent-warm) 70%, transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease);
+  pointer-events: none;
+}
+main .card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+main .card:hover::before { transform: scaleX(1); }
+.card > :last-child { margin-bottom: 0; }
+@media (max-width: 600px) {
+  .card { padding: 18px 16px; }
+}
+
+main .card .kicker {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.card .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  margin-right: 8px;
+  vertical-align: 0.3em;
+  background: currentColor;
+}
+
+/* Flagship card: tinted from the top like an exposure, warm kicker */
+main .card.flagship {
+  background:
+    radial-gradient(ellipse 90% 180px at 50% 0, color-mix(in srgb, var(--accent) 9%, transparent), transparent 75%),
+    var(--surface);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+.card.flagship .kicker { color: var(--accent-warm); }
+.card.flagship::before { transform: scaleX(1); opacity: 0.85; }
+
+.card h3 { margin-top: 2px; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  padding: 2px 10px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  white-space: nowrap;
+}
+.tags, .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.2s, transform 0.2s var(--ease);
+}
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 0 0 0 transparent, 0 4px 14px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.btn.primary:hover {
+  color: var(--on-accent);
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 6px 22px var(--glow);
+}
+.btn:active { transform: translateY(1px); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1em; }
+
+/* Project page buttons share the same look */
+.xr-actions .btn { border-radius: 8px; }
+main .xr-actions .btn.primary { color: var(--on-accent); }
+
+.media-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  margin: 0 0 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 6%, transparent), 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.media-embed iframe, .media-embed video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.muted { color: var(--muted); }
+
+/* ---------- Index page details ---------- */
+.news li time { font-size: 0.82rem; letter-spacing: 0.02em; color: var(--accent); }
+#publications .pub-group {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent-warm);
+}
+.pubs li { transition: background-color 0.2s; }
+.pubs a.pub-title { color: var(--text); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.pubs a.pub-title:hover { color: var(--accent); }
+
+/* ---------- Project page details ---------- */
+.xr-hero .xr-kicker { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; }
+.xr-hero .xr-tags .tag { font-size: 0.74rem; border-radius: 6px; }
+/* Diagrams sit on blueprint paper */
+.xr-page .xr-figure {
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+.xr-page .xr-status { border-left-color: var(--accent-warm); }
+.xr-page .xr-compare .card.chosen { border-color: var(--accent); }
+
+/* ---------- Personal page details ---------- */
+.personal .eyebrow { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; }
+.personal .avatar { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 24px var(--glow); }
+.teach-tags .chip { font-size: 0.76rem; border-radius: 6px; }
+.personal .now-list .label { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.04em; }
+
+/* ---------- Footer ---------- */
+body > .footer {
+  max-width: var(--maxw);
+  margin: 56px auto 0;
+  padding: 24px 16px 40px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* ---------- Motion (opt-in only) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .photo-wrap::after { animation: scan 2.4s var(--ease) 0.5s 1 both; }
+  .hero .photo-wrap:hover::after { animation: scan-again 2s var(--ease) 0s 1 both; }
+  .open-note::before { animation: beam-pulse 2.8s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+  main .card:hover { transform: none; }
+}
+@keyframes scan {
+  0% { background-position: 0 100%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { background-position: 0 0; opacity: 0; }
+}
+@keyframes scan-again {
+  0% { background-position: 0 100%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { background-position: 0 0; opacity: 0; }
+}
+@keyframes beam-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 0 8px var(--glow); }
+  50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 8%, transparent), 0 0 16px var(--glow); }
+}

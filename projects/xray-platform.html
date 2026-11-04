@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Burhan Karahasan">
+  <title>Magnetic Robot Navigation Under X-Ray — Burhan Karahasan</title>
+  <meta name="description" content="An automated platform for closed-loop control of small-scale robots under X-ray imaging, built end to end by Burhan Karahasan in Prof. Metin Sitti's Medical Robotics Laboratory at Koç University.">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Magnetic Robot Navigation Under X-Ray — Burhan Karahasan">
+  <meta property="og:description" content="Motorized stages, live X-ray image capture, an adapted neural-network detector and a finite-state-machine controller: closing the loop on small-scale robots under clinical-style imaging.">
+  <meta property="og:image" content="https://img.youtube.com/vi/_P9mQ2cJjDY/hqdefault.jpg">
+  <meta property="og:url" content="https://burhankarahasan.github.io/projects/xray-platform.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/site.css">
+
+  <style>
+    /* Page-specific styles. Colors come from the shared tokens in css/site.css;
+       the fallbacks keep the page readable if that file is missing. */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg, #fafaf9);
+      color: var(--text, #1c1917);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-wrap: break-word;
+    }
+    img, svg, iframe { max-width: 100%; }
+
+    .xr-page { max-width: 820px; margin: 0 auto; padding: 0 16px 48px; }
+
+    .xr-hero { padding: 40px 0 8px; }
+    .xr-kicker {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent, #0f766e); margin: 0 0 10px;
+    }
+    .xr-hero h1 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 14px;
+      color: var(--text, #1c1917);
+    }
+    .xr-summary { font-size: 1.12rem; color: var(--muted, #57534e); margin: 0 0 16px; max-width: 46em; }
+    .xr-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
+    .xr-tags .tag {
+      display: inline-block; font-size: 0.8rem; font-weight: 500; padding: 3px 10px; border-radius: 999px;
+      background: var(--accent-soft, #ccfbf1); color: var(--accent, #0f766e);
+    }
+
+    .xr-video { margin: 24px 0 8px; }
+    .xr-video .media-embed {
+      position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+      border-radius: 12px; border: 1px solid var(--border, #e7e5e4); background: #000;
+    }
+    @supports not (aspect-ratio: 16 / 9) {
+      .xr-video .media-embed { height: 0; padding-top: 56.25%; }
+    }
+    .xr-video .media-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .xr-caption { font-size: 0.88rem; color: var(--muted, #57534e); margin: 8px 0 0; }
+
+    .xr-page a { color: var(--accent, #0f766e); }
+
+    .xr-page .section { padding: 28px 0 4px; }
+    .xr-page h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.55rem; line-height: 1.25; margin: 0 0 12px; color: var(--text, #1c1917);
+    }
+    .xr-page p { margin: 0 0 14px; }
+
+    .xr-figure {
+      margin: 18px 0 6px; padding: 18px 14px 12px;
+      background: var(--surface, #ffffff); border: 1px solid var(--border, #e7e5e4); border-radius: 12px;
+    }
+    .xr-figure svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+    .xr-figure figcaption { font-size: 0.85rem; color: var(--muted, #57534e); margin-top: 10px; }
+    .xr-system svg { max-width: 500px; }
+    .xr-fsm svg { max-width: 440px; }
+
+    /* Diagram styling via tokens so it reads in light and dark mode */
+    .dg-text { fill: var(--text, #1c1917); font-family: "Inter", system-ui, sans-serif; font-size: 15px; font-weight: 600; }
+    .dg-sub { fill: var(--muted, #57534e); font-family: "Inter", system-ui, sans-serif; font-size: 12.5px; }
+    .dg-label { fill: var(--accent, #0f766e); font-family: "Inter", system-ui, sans-serif; font-size: 12.5px; font-weight: 600; }
+    .dg-box { fill: var(--surface, #ffffff); stroke: var(--border, #d6d3d1); stroke-width: 1.5; }
+    .dg-built { fill: var(--accent-soft, #ccfbf1); stroke: var(--accent, #0f766e); stroke-width: 1.5; }
+    .dg-adapted { fill: var(--surface, #ffffff); stroke: var(--muted, #78716c); stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .dg-line { fill: none; stroke: var(--muted, #78716c); stroke-width: 1.6; }
+    .dg-loop { fill: none; stroke: var(--accent, #0f766e); stroke-width: 2; }
+    .dg-head { fill: var(--muted, #78716c); }
+    .dg-head-accent { fill: var(--accent, #0f766e); }
+
+    .xr-system .dg-text { font-size: 19px; }
+    .xr-system .dg-sub { font-size: 15.5px; }
+    .xr-system .dg-label { font-size: 15px; }
+    .xr-page .section { scroll-margin-top: 90px; }
+    .xr-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; color: var(--muted, #57534e); margin-top: 8px; }
+    .xr-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .xr-swatch { width: 16px; height: 12px; border-radius: 3px; display: inline-block; }
+    .xr-swatch.built { background: var(--accent-soft, #ccfbf1); border: 1.5px solid var(--accent, #0f766e); }
+    .xr-swatch.adapted { border: 1.5px dashed var(--muted, #78716c); }
+
+    .xr-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0 8px; }
+    .xr-compare .card {
+      background: var(--surface, #ffffff); border: 1px solid var(--border, #e7e5e4);
+      border-radius: 12px; padding: 16px 18px;
+    }
+    .xr-compare h3 { font-size: 1rem; margin: 0 0 8px; color: var(--text, #1c1917); }
+    .xr-compare ul { margin: 0; padding-left: 18px; font-size: 0.95rem; }
+    .xr-compare li { margin-bottom: 6px; }
+    .xr-compare .card.chosen { border-color: var(--accent, #0f766e); }
+    @media (max-width: 640px) { .xr-compare { grid-template-columns: 1fr; } }
+
+    .xr-checklist { list-style: none; padding: 0; margin: 14px 0 6px; display: grid; gap: 10px; }
+    .xr-checklist li {
+      position: relative; padding: 12px 14px 12px 44px;
+      background: var(--surface, #ffffff); border: 1px solid var(--border, #e7e5e4); border-radius: 10px;
+    }
+    .xr-checklist li::before {
+      content: ""; position: absolute; left: 14px; top: 15px; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent, #0f766e);
+    }
+    .xr-checklist li::after {
+      content: ""; position: absolute; left: 20px; top: 19px; width: 6px; height: 9px;
+      border: solid var(--bg, #fafaf9); border-width: 0 2px 2px 0; transform: rotate(45deg);
+    }
+    .xr-checklist strong { display: block; color: var(--text, #1c1917); }
+    .xr-checklist span { color: var(--muted, #57534e); font-size: 0.95rem; }
+
+    .xr-status {
+      margin: 28px 0 8px; padding: 14px 18px; border-left: 3px solid var(--accent, #0f766e);
+      background: var(--surface, #ffffff); border-radius: 0 10px 10px 0; color: var(--muted, #57534e);
+    }
+    .xr-status strong { color: var(--text, #1c1917); }
+
+    .xr-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 0; }
+    .xr-actions .btn {
+      display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 0.95rem;
+      text-decoration: none; border: 1px solid var(--accent, #0f766e); color: var(--accent, #0f766e);
+    }
+    .xr-actions .btn.primary { background: var(--accent, #0f766e); color: var(--bg, #ffffff); }
+      .xr-figure img { display:block; width:100%; height:auto; border-radius:10px; background:#fff; border:1px solid var(--border, #e5e7eb); }
+    .xr-authors { color: var(--muted, #555); font-size: .95rem; margin-top: .75rem; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav"><a class="brand" href="../index.html">Burhan Karahasan</a><div class="nav-links"><a href="../index.html#research">Research</a><a href="../index.html#publications">Publications</a><a href="../projects/xray-platform.html">X-ray Platform</a><a href="../personal.html">Beyond the Lab</a><a href="../data/Burhan_Karahasan_CV.pdf">CV</a></div></nav>
+
+  <main class="xr-page">
+    <header class="xr-hero">
+      <p class="xr-kicker">M.Sc. project · Medical Robotics Laboratory, Koç University</p>
+      <h1>Image-Guided Small-Scale Magnetic Robot Navigation Under X-Ray</h1>
+      <p class="xr-summary">An autonomous platform, built end to end inside a cabinet X-ray system, that uses the live X-ray image as its feedback signal to steer a soft magnetic millirobot through a phantom lumen with a permanent magnet.</p>
+      <ul class="xr-tags" aria-label="Topics">
+        <li class="tag">Closed-loop control</li>
+        <li class="tag">X-ray imaging</li>
+        <li class="tag">Visual servoing</li>
+        <li class="tag">Magnetic actuation</li>
+        <li class="tag">Real-time systems</li>
+      </ul>
+      <p class="xr-authors"><strong>B. Karahasan</strong>, Ö. Yiğit, C. Wang, M. Sitti · Poster, 7th Turkish Robotics Conference, Koç University, İstanbul, July 2026</p>
+    </header>
+
+    <section class="xr-video" aria-label="Project video">
+      <div class="media-embed">
+        <iframe src="https://www.youtube.com/embed/_P9mQ2cJjDY" title="Image-guided magnetic robot navigation under X-ray" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <p class="xr-caption">The platform in operation. <a href="https://youtu.be/_P9mQ2cJjDY">Watch on YouTube</a>.</p>
+    </section>
+
+    <section class="section" id="problem">
+      <h2>The problem</h2>
+      <p>Most small-scale robots are developed and controlled under an optical microscope. That works on the bench, but it does not translate to the body: tissue is opaque. In clinical interventions, the imaging that is actually used to see inside a patient in real time is X-ray fluoroscopy.</p>
+      <p>Controlling a robot under X-ray is harder than under a camera. The frames are low-contrast and noisy, the robot is a small, faint target, and it can be occluded. X-ray-guided control has been demonstrated before; I set out to build an <em>automated, reproducible</em> closed-loop implementation, where imaging, perception, state estimation, planning and actuation run as one autonomous workflow.</p>
+    </section>
+
+    <section class="section" id="system">
+      <h2>The system</h2>
+      <p>The system estimates the position and orientation of the magnetic robot in the X-ray image, turns that estimate into a target in the physical workspace, and commands the motion hardware in a stable, rate-limited way.</p>
+      <figure class="xr-figure">
+        <img src="img/pipeline.jpg" alt="End-to-end pipeline: X-ray image acquisition, neural network, path planner with operator decisions, robotic manipulator, magnetic actuation of the robot" loading="lazy">
+        <figcaption>End-to-end pipeline. X-ray image acquisition feeds a neural network that estimates the robot's location; the path planner combines it with operator decisions; commands drive a robotic manipulator that actuates the robot magnetically.</figcaption>
+      </figure>
+      <figure class="xr-figure">
+        <img src="img/setup.jpg" alt="Hardware inside the X-ray cabinet: X-ray tube, optical camera, stepper and servo controller, robotic platform, permanent magnet, phantom lumen, soft millirobot, X-ray sensor" loading="lazy">
+        <figcaption>The hardware inside the X-ray cabinet. Left: the 30&nbsp;mm permanent magnet above the phantom lumen holding the soft millirobot. Right: the full system.</figcaption>
+      </figure>
+      <p><strong>Perception.</strong> The robot is found in each frame by a neural-network detector from our group's prior work on synthetic X-ray data (C. Wang et al., <em>Nature Machine Intelligence</em>, 2026). I adapted it and integrated it into the real-time loop; the detector itself is not my contribution, making it work as the sensor of a live control system is.</p>
+    </section>
+
+    <section class="section" id="architecture">
+      <h2>Closing the loop</h2>
+      <p>A pull controller and closed-form inverse kinematics turn the planned path into rate-limited commands for the robotic platform. X-ray imaging, segmentation and Kalman state estimation close the loop.</p>
+      <figure class="xr-figure">
+        <img src="img/architecture.jpg" alt="Closed-loop visual-servo block diagram: planned path, pull controller, closed-form IK, robotic platform, magnetic actuation, X-ray imaging, vision, state estimator" loading="lazy">
+        <figcaption>Closed-loop visual-servo architecture.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="fsm">
+      <h2>Why a state machine instead of PID</h2>
+      <p>PID was the first approach we considered. It fell short on this hardware: the platform is driven by stepper motors commanded over USB, and that link adds latency between deciding on a command and the motor executing it. Continuous feedback became unreliable.</p>
+      <p>So I matched the control structure to the actuators. Autonomous operation is organized as a finite-state machine that sends small, rate-limited position steps, prevents contradictory commands, and keeps going when perception drops out or progress stalls. This gave stable, precise navigation.</p>
+      <figure class="xr-figure">
+        <img src="img/fsm.jpg" alt="Finite-state machine: WAIT_VISION, a track-and-pull law with ORBIT, LEAD and CREEP states, recovery states BLIND_LEAD and STALL_HOLD, MANUAL_HOLD override, and DONE" loading="lazy">
+        <figcaption>The autonomous control state machine. A single track-and-pull law (ORBIT–LEAD–CREEP) is guarded by recovery states: BLIND_LEAD bridges vision dropouts and STALL_HOLD freezes the pose when progress stalls, while manual override is always available.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="built">
+      <h2>What I built</h2>
+      <p>Apart from the perception network, the platform is mine end to end, from the motors to the control software.</p>
+      <ul class="xr-checklist">
+        <li><strong>Robotic platform</strong><span>Motorized stages, with a stepper and a servo positioning the permanent magnet, integrated inside the cabinet X-ray system.</span></li>
+        <li><strong>Live image capture</strong><span>Frames taken from the X-ray unit and streamed into the control loop as the feedback signal.</span></li>
+        <li><strong>Calibration and state estimation</strong><span>Mapping detections to the workspace and filtering them into a stable estimate of the robot's pose.</span></li>
+        <li><strong>Planning and control</strong><span>The path follower, inverse kinematics and the state-machine controller.</span></li>
+        <li><strong>Real-time software</strong><span>The glue that ties capture, detection, estimation and actuation into one automated loop.</span></li>
+      </ul>
+    </section>
+
+    <section class="section" id="next">
+      <h2>What's next</h2>
+      <p>I am extending this work toward a journal manuscript, and toward automated control of microrobot swarms under X-ray: many small agents, observed through the same clinical imaging and steered as a group.</p>
+    </section>
+
+    <div class="xr-actions">
+      <a class="btn primary" href="https://youtu.be/_P9mQ2cJjDY">Watch the video</a>
+      <a class="btn" href="../index.html#research">&larr; Back to research</a>
+    </div>
+  </main>
+
+  <footer class="footer">© 2026 Burhan Karahasan · <a href="mailto:bkarahasan18@ku.edu.tr">bkarahasan18@ku.edu.tr</a></footer>
+</body>
+</html>

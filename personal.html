@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  personal.html: "Beyond the Lab"
+  ============================================================================
+  HOW TO FILL THIS PAGE IN
+  1. Search this file for "TODO(Burhan)". Every slot you need to fill has one.
+  2. Replace the bracketed text inside each <span class="todo">…</span> with your
+     own words, then delete the <span class="todo"> wrapper (keep the text).
+     Leftover .todo spans show a dashed underline, so you'll spot any you miss.
+  3. Photos: put them in images/personal/ using the file names given in the
+     comments (e.g. images/personal/fun-01.jpg). Then replace the placeholder
+     <div class="ph" ...> with an <img src="..." alt="..."> (same position).
+     Aim for ~1200px on the long edge, JPEG, under ~300 KB each.
+  4. Delete any section you don't want. Nothing here is load-bearing.
+  5. Keep it short. Someone should be able to read the whole page in a minute.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Burhan Karahasan">
+  <meta name="description" content="Beyond the lab: a little about Burhan Karahasan outside of robotics research at Koç University, including hobbies, photos, what he's reading, and teaching.">
+  <title>Beyond the Lab — Burhan Karahasan</title>
+
+  <link rel="icon" href="images/favicon/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+
+  <style>
+    /* Page-specific styles. Token fallbacks keep this page presentable even
+       if css/site.css is missing or still being written. */
+    :root {
+      --p-bg: var(--bg, #fbfaf7);
+      --p-surface: var(--surface, #ffffff);
+      --p-text: var(--text, #1f2933);
+      --p-muted: var(--muted, #5f6b76);
+      --p-accent: var(--accent, #0f766e);
+      --p-accent-soft: var(--accent-soft, #e6f2f0);
+      --p-border: var(--border, #e4e2dc);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --p-bg: var(--bg, #121417);
+        --p-surface: var(--surface, #1b1f24);
+        --p-text: var(--text, #e6e8eb);
+        --p-muted: var(--muted, #9aa4ae);
+        --p-accent: var(--accent, #5eead4);
+        --p-accent-soft: var(--accent-soft, #133a36);
+        --p-border: var(--border, #2b3138);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--p-bg);
+      color: var(--p-text);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--p-accent); }
+
+    /* Minimal nav/footer fallback (site.css may override). */
+    .site-nav {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: .5rem 1.25rem; padding: .9rem 1rem; max-width: 960px; margin: 0 auto;
+    }
+    .site-nav .brand {
+      font-family: "Source Serif 4", Georgia, serif; font-weight: 600; font-size: 1.1rem;
+      color: var(--p-text); text-decoration: none;
+    }
+    .site-nav .nav-links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .92rem; }
+    .site-nav .nav-links a { color: var(--p-muted); text-decoration: none; }
+    .site-nav .nav-links a:hover, .site-nav .nav-links a[aria-current="page"] { color: var(--p-accent); }
+    .footer {
+      max-width: 960px; margin: 3rem auto 0; padding: 1.5rem 1rem 2.5rem;
+      border-top: 1px solid var(--p-border); color: var(--p-muted); font-size: .9rem; text-align: center;
+    }
+
+    /* Layout */
+    .personal { max-width: 760px; margin: 0 auto; padding: 0 1rem; }
+    .personal h1, .personal h2, .personal h3 {
+      font-family: "Source Serif 4", Georgia, serif; font-weight: 600; line-height: 1.25; color: var(--p-text);
+    }
+    .personal h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); margin: 0 0 .5rem; }
+    .personal h2 { font-size: 1.35rem; margin: 0 0 .9rem; }
+    .personal h3 { font-size: 1.05rem; margin: .8rem 0 .3rem; }
+    .personal section { padding: 2rem 0; border-top: 1px solid var(--p-border); }
+    .personal section.hero { border-top: 0; padding-top: 2.5rem; }
+    .personal p { margin: 0 0 .8rem; }
+    .eyebrow {
+      font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--p-accent); font-weight: 600; margin: 0 0 .35rem;
+    }
+
+    /* Placeholders */
+    .todo {
+      color: var(--p-muted);
+      text-decoration: underline dashed var(--p-accent);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .ph {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background:
+        repeating-linear-gradient(45deg, transparent 0 10px, var(--p-accent-soft) 10px 20px),
+        var(--p-surface);
+      border: 1px dashed var(--p-border);
+      border-radius: 10px;
+      color: var(--p-muted);
+      font-size: .78rem;
+      padding: .5rem;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .ph::before { content: "Photo: "; font-weight: 600; margin-right: .25em; }
+
+    /* Hero */
+    .hero-row { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+    .avatar {
+      width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--p-accent-soft); flex: 0 0 auto;
+    }
+    .hero-text { flex: 1 1 260px; min-width: 0; }
+    .lede { font-size: 1.08rem; color: var(--p-text); }
+
+    /* Cards */
+    .fun-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 560px) { .fun-grid { grid-template-columns: repeat(2, 1fr); } }
+    .fun-card {
+      background: var(--p-surface); border: 1px solid var(--p-border);
+      border-radius: 12px; padding: .75rem .75rem 1rem;
+    }
+    .fun-card .ph, .fun-card img { border-radius: 8px; aspect-ratio: 4 / 3; object-fit: cover; }
+    .fun-card p { font-size: .95rem; color: var(--p-muted); margin: 0; }
+
+    /* Now list */
+    .now-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+    .now-list li {
+      display: grid; grid-template-columns: 6.5rem 1fr; gap: .75rem;
+      padding: .7rem .9rem; background: var(--p-surface);
+      border: 1px solid var(--p-border); border-radius: 10px;
+    }
+    .now-list .label { font-weight: 600; font-size: .85rem; color: var(--p-accent); padding-top: .1rem; }
+    @media (max-width: 420px) { .now-list li { grid-template-columns: 1fr; gap: .15rem; } }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin: 0; padding: 0; }
+    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+    .gallery figure { margin: 0; }
+    .gallery .ph, .gallery img { aspect-ratio: 1 / 1; border-radius: 8px; object-fit: cover; }
+    .gallery figcaption { font-size: .8rem; color: var(--p-muted); margin-top: .35rem; line-height: 1.4; }
+
+    /* Fun facts + teaching */
+    .facts { margin: 0; padding-left: 1.2rem; }
+    .facts li { margin-bottom: .35rem; }
+    .teach-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
+    .chip {
+      display: inline-block; font-size: .82rem; padding: .2rem .65rem; border-radius: 999px;
+      background: var(--p-accent-soft); color: var(--p-accent); border: 1px solid transparent;
+    }
+
+    /* Closing */
+    .closing { text-align: center; }
+    .closing .say-hi {
+      display: inline-block; margin-top: .4rem; padding: .55rem 1.1rem; border-radius: 999px;
+      background: var(--p-accent); color: var(--p-bg); text-decoration: none; font-weight: 500;
+    }
+    .closing .say-hi:hover { opacity: .9; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav"><a class="brand" href="index.html">Burhan Karahasan</a><div class="nav-links"><a href="index.html#research">Research</a><a href="index.html#publications">Publications</a><a href="projects/xray-platform.html">X-ray Platform</a><a href="personal.html">Beyond the Lab</a><a href="data/Burhan_Karahasan_CV.pdf">CV</a></div></nav>
+
+<main class="personal">
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="hero section" id="intro">
+    <div class="hero-row">
+      <img class="avatar" src="images/BurhanKarahasan_480.jpg" alt="Burhan Karahasan" width="88" height="88">
+      <div class="hero-text">
+        <p class="eyebrow">Beyond the lab</p>
+        <h1>Hi, I'm Burhan.</h1>
+        <!-- TODO(Burhan): 1–2 sentence personal intro. Who you are when you're not in the lab. -->
+        <p class="lede"><span class="todo">[Write 1–2 friendly sentences about who you are outside of research, e.g. what you're like on a weekend.]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHERE I'M FROM ===================== -->
+  <section class="section" id="background">
+    <h2>Where I'm from &amp; how I got here</h2>
+    <!-- TODO(Burhan): Where you grew up and what pulled you toward engineering/robotics. -->
+    <p><span class="todo">[Write 2–3 sentences about where you grew up and what got you into engineering.]</span></p>
+    <p>I've been at Koç University in Istanbul since 2018, and I'm now an M.Sc. student in the Medical Robotics Lab there.
+      <!-- TODO(Burhan): Optional sentence about life in Istanbul / what you like about the city. -->
+      <span class="todo">[Optional: one sentence about what you like about living in Istanbul.]</span></p>
+  </section>
+
+  <!-- ===================== FOR FUN ===================== -->
+  <section class="section" id="fun">
+    <h2>What I do for fun</h2>
+    <div class="fun-grid">
+      <article class="fun-card card">
+        <!-- TODO(Burhan): photo images/personal/fun-01.jpg -->
+        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-01.jpg</div>
+        <!-- TODO(Burhan): hobby #1 name + one line -->
+        <h3><span class="todo">[Hobby 1]</span></h3>
+        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+      </article>
+      <article class="fun-card card">
+        <!-- TODO(Burhan): photo images/personal/fun-02.jpg -->
+        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-02.jpg</div>
+        <!-- TODO(Burhan): hobby #2 name + one line -->
+        <h3><span class="todo">[Hobby 2]</span></h3>
+        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+      </article>
+      <article class="fun-card card">
+        <!-- TODO(Burhan): photo images/personal/fun-03.jpg -->
+        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-03.jpg</div>
+        <!-- TODO(Burhan): hobby #3 name + one line -->
+        <h3><span class="todo">[Hobby 3]</span></h3>
+        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+      </article>
+      <article class="fun-card card">
+        <!-- TODO(Burhan): photo images/personal/fun-04.jpg (or delete this card to keep 3) -->
+        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-04.jpg</div>
+        <!-- TODO(Burhan): hobby #4 name + one line (optional) -->
+        <h3><span class="todo">[Hobby 4, optional]</span></h3>
+        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== CURRENTLY ===================== -->
+  <section class="section" id="currently">
+    <h2>Currently</h2>
+    <ul class="now-list">
+      <!-- TODO(Burhan): a book (title + author, optionally a few words on it) -->
+      <li><span class="label">Reading</span><span><span class="todo">[Book title, author, and a few words on it.]</span></span></li>
+      <!-- TODO(Burhan): music / podcast / album -->
+      <li><span class="label">Listening to</span><span><span class="todo">[An album, artist, or podcast you have on repeat.]</span></span></li>
+      <!-- TODO(Burhan): something you're learning outside research -->
+      <li><span class="label">Learning</span><span><span class="todo">[A skill you're picking up outside of research.]</span></span></li>
+    </ul>
+  </section>
+
+  <!-- ===================== GALLERY ===================== -->
+  <section class="section" id="gallery">
+    <h2>A few snapshots</h2>
+    <div class="gallery">
+      <!-- TODO(Burhan): images/personal/gallery-01.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-01.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <!-- TODO(Burhan): images/personal/gallery-02.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-02.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <!-- TODO(Burhan): images/personal/gallery-03.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-03.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <!-- TODO(Burhan): images/personal/gallery-04.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-04.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <!-- TODO(Burhan): images/personal/gallery-05.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-05.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <!-- TODO(Burhan): images/personal/gallery-06.jpg + caption -->
+      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-06.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===================== TEACHING ===================== -->
+  <section class="section" id="teaching">
+    <h2>Teaching &amp; mentoring</h2>
+    <p>At Koç I've given peer academic support to fellow students in
+      <!-- TODO(Burhan): Optional: add one line on what you enjoy about helping others learn. -->
+      core engineering courses. <span class="todo">[Optional: one line on what you enjoy about teaching.]</span></p>
+    <div class="teach-tags">
+      <span class="chip tag">Calculus I</span>
+      <span class="chip tag">Statics</span>
+      <span class="chip tag">Dynamics</span>
+      <span class="chip tag">Dynamical Modeling &amp; Control</span>
+    </div>
+  </section>
+
+  <!-- ===================== FUN FACTS (optional) ===================== -->
+  <section class="section" id="facts">
+    <h2>A few fun facts</h2>
+    <!-- TODO(Burhan): 2–3 short, light facts. Delete this whole section if you'd rather not. -->
+    <ul class="facts">
+      <li><span class="todo">[Fun fact 1]</span></li>
+      <li><span class="todo">[Fun fact 2]</span></li>
+      <li><span class="todo">[Fun fact 3]</span></li>
+    </ul>
+  </section>
+
+  <!-- ===================== CLOSING ===================== -->
+  <section class="section closing" id="say-hi">
+    <h2>Say hi</h2>
+    <!-- TODO(Burhan): Optional: tweak the closing line (e.g. "always happy to chat about X over coffee"). -->
+    <p>Whether it's about robots or anything on this page, I'd love to hear from you. <span class="todo">[Optional: add something you're always happy to chat about.]</span></p>
+    <a class="say-hi btn" href="mailto:bkarahasan18@ku.edu.tr">Send me an email</a>
+  </section>
+
+</main>
+
+<footer class="footer">© 2026 Burhan Karahasan · <a href="mailto:bkarahasan18@ku.edu.tr">bkarahasan18@ku.edu.tr</a></footer>
+
+</body>
+</html>
