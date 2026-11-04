@@ -1,27 +1,10 @@
 <!DOCTYPE html>
-<!--
-  ============================================================================
-  personal.html: "Beyond the Lab"
-  ============================================================================
-  HOW TO FILL THIS PAGE IN
-  1. Search this file for "TODO(Burhan)". Every slot you need to fill has one.
-  2. Replace the bracketed text inside each <span class="todo">…</span> with your
-     own words, then delete the <span class="todo"> wrapper (keep the text).
-     Leftover .todo spans show a dashed underline, so you'll spot any you miss.
-  3. Photos: put them in images/personal/ using the file names given in the
-     comments (e.g. images/personal/fun-01.jpg). Then replace the placeholder
-     <div class="ph" ...> with an <img src="..." alt="..."> (same position).
-     Aim for ~1200px on the long edge, JPEG, under ~300 KB each.
-  4. Delete any section you don't want. Nothing here is load-bearing.
-  5. Keep it short. Someone should be able to read the whole page in a minute.
-  ============================================================================
--->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Burhan Karahasan">
-  <meta name="description" content="Beyond the lab: a little about Burhan Karahasan outside of robotics research at Koç University, including hobbies, photos, what he's reading, and teaching.">
+  <meta name="description" content="Beyond the lab: a little about Burhan Karahasan outside of robotics research at Koç University, including riding, running, travel and photos.">
   <title>Beyond the Lab — Burhan Karahasan</title>
 
   <link rel="icon" href="images/favicon/favicon.ico" sizes="any">
@@ -180,6 +163,14 @@
       background: var(--p-accent); color: var(--p-bg); text-decoration: none; font-weight: 500;
     }
     .closing .say-hi:hover { opacity: .9; }
+    .fun-card { padding: 1rem 1.1rem 1.1rem; }
+    .fun-card .fun-label { font-family: var(--font-mono, ui-monospace, monospace); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--p-accent); margin: 0; }
+    .fun-card h3 { margin-top: .25rem; }
+    .gallery-group { margin: 1.4rem 0 .7rem !important; font-size: 1rem !important; color: var(--p-muted) !important; }
+    .gallery a { display: block; border-radius: 8px; overflow: hidden; }
+    .gallery img { width: 100%; transition: transform .3s ease; }
+    .gallery a:hover img { transform: scale(1.03); }
+    @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
   </style>
 </head>
 <body>
@@ -195,20 +186,15 @@
       <div class="hero-text">
         <p class="eyebrow">Beyond the lab</p>
         <h1>Hi, I'm Burhan.</h1>
-        <!-- TODO(Burhan): 1–2 sentence personal intro. Who you are when you're not in the lab. -->
-        <p class="lede"><span class="todo">[Write 1–2 friendly sentences about who you are outside of research, e.g. what you're like on a weekend.]</span></p>
+        <p class="lede">Outside the lab I would rather be doing something than watching it: riding, running, swimming, building, or walking around a city I haven't seen yet.</p>
       </div>
     </div>
   </section>
 
   <!-- ===================== WHERE I'M FROM ===================== -->
   <section class="section" id="background">
-    <h2>Where I'm from &amp; how I got here</h2>
-    <!-- TODO(Burhan): Where you grew up and what pulled you toward engineering/robotics. -->
-    <p><span class="todo">[Write 2–3 sentences about where you grew up and what got you into engineering.]</span></p>
-    <p>I've been at Koç University in Istanbul since 2018, and I'm now an M.Sc. student in the Medical Robotics Lab there.
-      <!-- TODO(Burhan): Optional sentence about life in Istanbul / what you like about the city. -->
-      <span class="todo">[Optional: one sentence about what you like about living in Istanbul.]</span></p>
+    <h2>Istanbul and beyond</h2>
+    <p>I've lived in Istanbul since 2018, when I started at Koç University, and I'm now an M.Sc. student in the Medical Robotics Lab there. On weekends and holidays I travel to other cities, and sometimes I go back to my home city, where I get on my bicycle.</p>
   </section>
 
   <!-- ===================== FOR FUN ===================== -->
@@ -216,74 +202,74 @@
     <h2>What I do for fun</h2>
     <div class="fun-grid">
       <article class="fun-card card">
-        <!-- TODO(Burhan): photo images/personal/fun-01.jpg -->
-        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-01.jpg</div>
-        <!-- TODO(Burhan): hobby #1 name + one line -->
-        <h3><span class="todo">[Hobby 1]</span></h3>
-        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+        <p class="fun-label">Two wheels</p>
+        <h3>Riding</h3>
+        <p>I take my Husqvarna Svartpilen 250 across Istanbul, usually to a new place for kebab or fish.</p>
       </article>
       <article class="fun-card card">
-        <!-- TODO(Burhan): photo images/personal/fun-02.jpg -->
-        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-02.jpg</div>
-        <!-- TODO(Burhan): hobby #2 name + one line -->
-        <h3><span class="todo">[Hobby 2]</span></h3>
-        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+        <p class="fun-label">Endurance</p>
+        <h3>Running and swimming</h3>
+        <p>I swim, and I run now and then. A 10K at about 5:00 per kilometre is my pace so far.</p>
       </article>
       <article class="fun-card card">
-        <!-- TODO(Burhan): photo images/personal/fun-03.jpg -->
-        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-03.jpg</div>
-        <!-- TODO(Burhan): hobby #3 name + one line -->
-        <h3><span class="todo">[Hobby 3]</span></h3>
-        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+        <p class="fun-label">Side projects</p>
+        <h3>Building electronics</h3>
+        <p>Small electronics projects of my own, from the circuit to the code, just because I want them to exist.</p>
       </article>
       <article class="fun-card card">
-        <!-- TODO(Burhan): photo images/personal/fun-04.jpg (or delete this card to keep 3) -->
-        <div class="ph" role="img" aria-label="Photo placeholder">images/personal/fun-04.jpg</div>
-        <!-- TODO(Burhan): hobby #4 name + one line (optional) -->
-        <h3><span class="todo">[Hobby 4, optional]</span></h3>
-        <p><span class="todo">[One or two lines on why you enjoy it.]</span></p>
+        <p class="fun-label">Museums and monuments</p>
+        <h3>Travel and architecture</h3>
+        <p>I'm drawn to museums and to gigantic structures, the kind of building that makes you wonder how anyone made it.</p>
       </article>
     </div>
   </section>
 
-  <!-- ===================== CURRENTLY ===================== -->
+  <!-- ===================== SMALL THINGS ===================== -->
   <section class="section" id="currently">
-    <h2>Currently</h2>
+    <h2>Small things</h2>
     <ul class="now-list">
-      <!-- TODO(Burhan): a book (title + author, optionally a few words on it) -->
-      <li><span class="label">Reading</span><span><span class="todo">[Book title, author, and a few words on it.]</span></span></li>
-      <!-- TODO(Burhan): music / podcast / album -->
-      <li><span class="label">Listening to</span><span><span class="todo">[An album, artist, or podcast you have on repeat.]</span></span></li>
-      <!-- TODO(Burhan): something you're learning outside research -->
-      <li><span class="label">Learning</span><span><span class="todo">[A skill you're picking up outside of research.]</span></span></li>
+      <li><span class="label">Watching</span><span>Dune is a favourite. I liked the MCU films too, although the recent ones haven't been as good.</span></li>
+      <li><span class="label">Sketching</span><span>Quick sketches when I'm somewhere new, or while I wait for my meal at a restaurant.</span></li>
+      <li><span class="label">Books</span><span>I read, and I enjoy movies and series, but given the choice I'll pick something active over something I just watch.</span></li>
     </ul>
   </section>
 
   <!-- ===================== GALLERY ===================== -->
   <section class="section" id="gallery">
     <h2>A few snapshots</h2>
+
+    <h3 class="gallery-group">Eastern Türkiye, with Faruk and Birkan</h3>
     <div class="gallery">
-      <!-- TODO(Burhan): images/personal/gallery-01.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-01.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
-      <!-- TODO(Burhan): images/personal/gallery-02.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-02.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
-      <!-- TODO(Burhan): images/personal/gallery-03.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-03.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
-      <!-- TODO(Burhan): images/personal/gallery-04.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-04.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
-      <!-- TODO(Burhan): images/personal/gallery-05.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-05.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
-      <!-- TODO(Burhan): images/personal/gallery-06.jpg + caption -->
-      <figure><div class="ph" role="img" aria-label="Photo placeholder">images/personal/gallery-06.jpg</div><figcaption><span class="todo">[Caption: where / what]</span></figcaption></figure>
+      <figure><a href="images/personal/urfa-gobeklitepe.jpg"><img src="images/personal/urfa-gobeklitepe.jpg" alt="Selfie at the Göbeklitepe excavation" loading="lazy"></a><figcaption>Göbeklitepe, Şanlıurfa</figcaption></figure>
+      <figure><a href="images/personal/urfa-friends.jpg"><img src="images/personal/urfa-friends.jpg" alt="Burhan with Faruk and Birkan" loading="lazy"></a><figcaption>With Faruk and Birkan</figcaption></figure>
+      <figure><a href="images/personal/mardin-minaret.jpg"><img src="images/personal/mardin-minaret.jpg" alt="Selfie below a stone minaret" loading="lazy"></a><figcaption>Old stone and minarets, Mardin</figcaption></figure>
+      <figure><a href="images/personal/ani-church-dome.jpg"><img src="images/personal/ani-church-dome.jpg" alt="Selfie under the painted dome of a ruined church at Ani" loading="lazy"></a><figcaption>Under a painted dome, Ani ruins, Kars</figcaption></figure>
+      <figure><a href="images/personal/ani-ruins.jpg"><img src="images/personal/ani-ruins.jpg" alt="Selfie on a hill with a medieval church behind" loading="lazy"></a><figcaption>Ani ruins, Kars</figcaption></figure>
+      <figure><a href="images/personal/ani-hills.jpg"><img src="images/personal/ani-hills.jpg" alt="Selfie above a green valley" loading="lazy"></a><figcaption>The valley around Ani</figcaption></figure>
+    </div>
+
+    <h3 class="gallery-group">Istanbul, with Azka and Ali</h3>
+    <div class="gallery">
+      <figure><a href="images/personal/istanbul-friends.jpg"><img src="images/personal/istanbul-friends.jpg" alt="Selfie with two friends in front of a monument" loading="lazy"></a><figcaption>An evening out in Istanbul</figcaption></figure>
+      <figure><a href="images/personal/istanbul-lab.jpg"><img src="images/personal/istanbul-lab.jpg" alt="Selfie with friends in a lab" loading="lazy"></a><figcaption>Late hours in the lab</figcaption></figure>
+      <figure><a href="images/personal/istanbul-darts.jpg"><img src="images/personal/istanbul-darts.jpg" alt="Selfie with two friends in front of a dartboard" loading="lazy"></a><figcaption>Darts night</figcaption></figure>
+    </div>
+
+    <h3 class="gallery-group">Munich: museums and churches</h3>
+    <div class="gallery">
+      <figure><a href="images/personal/munich-theatinerkirche.jpg"><img src="images/personal/munich-theatinerkirche.jpg" alt="Theatinerkirche lit up at night" loading="lazy"></a><figcaption>Theatinerkirche at night</figcaption></figure>
+      <figure><a href="images/personal/munich-frauenkirche.jpg"><img src="images/personal/munich-frauenkirche.jpg" alt="Selfie below the Frauenkirche tower" loading="lazy"></a><figcaption>Below the Frauenkirche</figcaption></figure>
+      <figure><a href="images/personal/munich-propylaen.jpg"><img src="images/personal/munich-propylaen.jpg" alt="The Propyläen gate at Königsplatz" loading="lazy"></a><figcaption>Propyläen, Königsplatz</figcaption></figure>
+      <figure><a href="images/personal/munich-marcus-aurelius.jpg"><img src="images/personal/munich-marcus-aurelius.jpg" alt="Marble bust of Marcus Aurelius" loading="lazy"></a><figcaption>Marcus Aurelius, Glyptothek</figcaption></figure>
+      <figure><a href="images/personal/munich-fossils.jpg"><img src="images/personal/munich-fossils.jpg" alt="Fossil skeletons in a museum hall" loading="lazy"></a><figcaption>Fossil hall</figcaption></figure>
+      <figure><a href="images/personal/munich-m3gtr.jpg"><img src="images/personal/munich-m3gtr.jpg" alt="Silver and blue BMW M3 GTR race car" loading="lazy"></a><figcaption>BMW M3 GTR, BMW Museum</figcaption></figure>
     </div>
   </section>
 
   <!-- ===================== TEACHING ===================== -->
   <section class="section" id="teaching">
     <h2>Teaching &amp; mentoring</h2>
-    <p>At Koç I've given peer academic support to fellow students in
-      <!-- TODO(Burhan): Optional: add one line on what you enjoy about helping others learn. -->
-      core engineering courses. <span class="todo">[Optional: one line on what you enjoy about teaching.]</span></p>
+    <p>At Koç I've given peer academic support to fellow students in core engineering courses.</p>
     <div class="teach-tags">
       <span class="chip tag">Calculus I</span>
       <span class="chip tag">Statics</span>
@@ -292,22 +278,10 @@
     </div>
   </section>
 
-  <!-- ===================== FUN FACTS (optional) ===================== -->
-  <section class="section" id="facts">
-    <h2>A few fun facts</h2>
-    <!-- TODO(Burhan): 2–3 short, light facts. Delete this whole section if you'd rather not. -->
-    <ul class="facts">
-      <li><span class="todo">[Fun fact 1]</span></li>
-      <li><span class="todo">[Fun fact 2]</span></li>
-      <li><span class="todo">[Fun fact 3]</span></li>
-    </ul>
-  </section>
-
   <!-- ===================== CLOSING ===================== -->
   <section class="section closing" id="say-hi">
     <h2>Say hi</h2>
-    <!-- TODO(Burhan): Optional: tweak the closing line (e.g. "always happy to chat about X over coffee"). -->
-    <p>Whether it's about robots or anything on this page, I'd love to hear from you. <span class="todo">[Optional: add something you're always happy to chat about.]</span></p>
+    <p>Whether it's robots, a good kebab place or a building worth the trip, I'd love to hear from you.</p>
     <a class="say-hi btn" href="mailto:bkarahasan18@ku.edu.tr">Send me an email</a>
   </section>
 
